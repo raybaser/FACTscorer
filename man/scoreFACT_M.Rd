@@ -4,58 +4,89 @@
 \alias{scoreFACT_M}
 \title{Score the FACT-M}
 \usage{
-scoreFACT_M(df, updateItems = FALSE, keepNvalid = FALSE)
+scoreFACT_M(df, id = NULL, AConly = FALSE, updateItems = FALSE,
+  keepNvalid = FALSE)
 }
 \arguments{
-\item{df}{A data frame with the FACT-M items, appropriately-named.}
+\item{df}{A data frame with the questionnaire items, appropriately-named.}
 
-\item{updateItems}{Logical, if \code{TRUE} any original item that is
-reverse coded for scoring will be replaced by its reverse coded version
-in the returned data frame, and any values of 8 or 9 will be replaced
-with NA.  The default, \code{FALSE}, returns the original items
-unmodified.}
+\item{id}{(optional) The quoted name of a variable in \code{df} with a unique
+value for each row of \code{df}. If an \code{id} variable is provided
+here, it will also be included with the scale scores in the output data
+frame. This can facilitate accurate merging of the scale scores back into
+the input \code{df}.}
 
-\item{keepNvalid}{Logical, if \code{TRUE} the function
-returns an additional variable for most of the returned scale scores
-containing the number of valid, non-missing responses from each
-respondent to the items on the given scale.  If \code{FALSE} (the
-default), these variables are omitted from the returned data frame.}
+\item{AConly}{(optional) Logical, if omitted or set to \code{FALSE} (the
+default) then the function will expect \code{df} to contain the
+FACT-General items as well as the more specific "Additional Concerns" (AC)
+items. If \code{TRUE}, then the function will only find the AC items in
+\code{df}, and will only score the subscale(s) produced by the AC items.}
+
+\item{updateItems}{(optional) Logical, if \code{TRUE} then updated versions
+of the items (i.e., re-coded for score calculation) will be returned in the
+output data frame with the scale scores. The default, \code{FALSE}, does
+not save any updated versions of the items in the resulting data frame.
+Most users will want to omit this argument or, equivalently, set it to
+\code{FALSE}.}
+
+\item{keepNvalid}{(optional) Logical, if \code{TRUE} then the output data
+frame will have additional variables containing the number of valid,
+non-missing responses from each respondent to the items on a given scale
+(see Details). If \code{FALSE} (the default), these variables will not be
+in the returned data frame. Most users will want to omit this argument
+or, equivalently, set it to \code{FALSE}.}
 }
 \value{
-The original data frame is returned (optionally with modified
-items if \code{updateItems = TRUE}) with new variables corresponding to
-the scored scales. If \code{keepNvalid = TRUE}, for each scored scale an
-additional variable is returned that contains the number of valid
-responses each respondent made to the items making up the given scale.
-These optional variables have names of the format \code{SCALENAME_N}.
-The following scale scores are returned:
+A data frame with the following scale scores is returned:
 
-\describe{
-  \item{PWB}{Physical Well-Being subscale}
-  \item{SWB}{Social/Family Well-Being subscale}
-  \item{EWB}{Emotional Well-Being subscale}
-  \item{FWB}{Physical Well-Being subscale}
-  \item{FACTG}{FACT-G Total Score (i.e., PWB+SWB+EWB+FWB)}
-  \item{MS}{Melanoma subscale}
- \item{MSS}{Melanoma Surgery Scale}
-  \item{FACT_M_TOTAL}{FACT-M Total Score (i.e., PWB+SWB+EWB+FWB+MS+MSS)}
-  \item{FACT_M_TOI}{FACT-M Trial Outcome Index (e.g., PWB+FWB+MS+MSS)}
+\itemize{
+  \item \strong{PWB} - Physical Well-Being subscale
+  \item \strong{SWB} - Social/Family Well-Being subscale
+  \item \strong{EWB} - Emotional Well-Being subscale
+  \item \strong{FWB} - Physical Well-Being subscale
+  \item \strong{FACTG} - FACT-G Total Score (PWB+SWB+EWB+FWB)
+  \item \strong{MS} - Melanoma subscale
+  \item \strong{MSS} - Melanoma Surgery subscale
+  \item \strong{FACT_M_TOTAL} - FACT-M Total Score (PWB+SWB+EWB+FWB+MS)
+  \item \strong{FACT_M_TOI} - FACT-M Trial Outcome Index (PWB+FWB+MS)
 }
+
+If \code{AConly = TRUE}, the only scale scores returned are \strong{MS} and
+\strong{MSS}.
+
+If a variable was given to the \code{id} argument, then that variable will
+also be in the returned data frame. Additional, relatively unimportant,
+variables will be returned if \code{updateItems = TRUE} or \code{keepNvalid =
+TRUE}.
 }
 \description{
-Generates all of the scores of the Functional Assessment of Cancer Therapy - 
+Generates all of the scores of the Functional Assessment of Cancer Therapy -
 Melanoma (FACT-M, v4) from item responses.
 }
 \details{
-Given a data frame that includes all of the FACT-M (Version 4) items as 
-variables, appropriately named, this function generates all of the FACT-M 
-scale scores.  It is crucial that the item variables in the supplied data 
-frame are named according to FACT conventions.  For example, the first 
-physical well-being item should be named GP1, the second GP2, and so on.  
+Given a data frame that includes all of the FACT-M (Version 4) items as
+variables, appropriately named, this function generates all of the FACT-M
+scale scores.  It is crucial that the item variables in the supplied data
+frame are named according to FACT conventions.  For example, the first
+physical well-being item should be named GP1, the second GP2, and so on.
 Please refer to the materials provided by \url{http://www.facit.org} for the
 particular questionnaire you are using.  In particular, refer to the left
 margin of the official questionnaire (i.e., from facit.org) for the
 appropriate item variable names.
+
+This questionnaire consists of two components: (1) FACT-G items and (2)
+"Additional Concerns" items.  The FACT-G items (G for General) measure
+general aspects of QoL common to all cancer patients. The "Additional
+Concerns" items measure issues relevant for a specific cancer type,
+treatment, or symptom. These two questionnaire components are typically
+administered together. In some studies, however, ONLY the "Additional
+Concerns" items are administered. The \code{AConly} argument is provided to
+accommodate such cases, and should be set to \code{AConly = TRUE} if ONLY the
+"Additional Concerns" items were administered.
+
+For more details on the \code{updateItems} and \code{keepNvalid}
+arguments, see the documentation entry for \code{\link{scoreFACTG}} and
+\code{\link{FACTscorer}}.
 }
 \section{Note}{
 
@@ -67,25 +98,16 @@ This scoring function expects missing item responses to be coded as NA,
 8, or 9, and valid item responses to be coded as 0, 1, 2, 3, or 4.  Any
 other value for any of the items will result in an error message and no
 scores.
-
-Some item variables are reverse coded for the purpose of generating the
-scale scores.  The official (e.g., from \url{http://www.facit.org}) SAS
-and SPSS scoring algorithms for this questionnaire automatically replace
-the original items with their reverse-coded versions.  This can be
-confusing if you accidentally run the algorithm more than once on your
-data.  As its default, \code{scoreFACT_M} DOES NOT replace any of your
-original item variables with the reverse coded versions.  However, for
-consistentcy with the behavior of the other versions on
-\url{http://www.facit.org}, the \code{updateItems} argument is
-provided.  If set to \code{TRUE}, any item that is supposed to be
-reverse coded will be replaced with its reversed version in the data
-frame returned by \code{scoreFACT_M}.
 }
 \examples{
+\dontrun{
+## To see examples using this function, run:  example(scoreFACT_M)
+## Also see the examples for the very similar scoreFACT_B function }
+\dontshow{
 ## Setting up item names for fake data
-G_names <- c(paste0('GP', 1:7), 
-             paste0('GS', 1:7), 
-             paste0('GE', 1:6), 
+G_names <- c(paste0('GP', 1:7),
+             paste0('GS', 1:7),
+             paste0('GE', 1:6),
              paste0('GF', 1:7))
 AC_names1 <- c('M1', 'M2', 'M3', 'B1', 'ITU4', 'An10', 'Hep3', 'C1', 'C6',
 'M5', 'M6', 'ITU3', 'MS8', 'M8',  'M9', 'HI7')
@@ -94,35 +116,63 @@ AC_names <- c(AC_names1, AC_names2)
 itemNames <- c(G_names, AC_names)
 ## Generating random item responses for 8 fake respondents
 set.seed(6375309)
-exampleDat <- t(replicate(8, sample(0:4, size = length(itemNames), replace =
-TRUE)))
-## Making half of respondents missing about 10\% of items, 
+exampleDat <- t(replicate(8, sample(0:4, size = length(itemNames), replace = TRUE)))
+## Making half of respondents missing about 10\% of items,
 ## half missing about 50\%.
-miss10 <- t(replicate(4, sample(c(0, 9), prob = c(0.9, 0.1), 
+miss10 <- t(replicate(4, sample(c(0, 9), prob = c(0.9, 0.1),
     size = length(itemNames), replace = TRUE)))
-miss50 <- t(replicate(4, sample(c(0, 9), prob = c(0.5, 0.5), 
+miss50 <- t(replicate(4, sample(c(0, 9), prob = c(0.5, 0.5),
     size = length(itemNames), replace = TRUE)))
 missMtx <- rbind(miss10, miss50)
 ## Using 9 as the code for missing responses
 exampleDat[missMtx == 9] <- 9
-exampleDat <- as.data.frame(cbind(ID = paste0('ID', 1:8), 
+exampleDat <- as.data.frame(cbind(ID = paste0('ID', 1:8),
     as.data.frame(exampleDat)))
 names(exampleDat) <- c('ID', itemNames)
 
-## Returns data frame with scale scores and with original items untouched
-scoredDat <- scoreFACT_M(exampleDat)
-names(scoredDat)
-scoredDat
-## Returns data frame with scale scores, with the appropriate items
-## reverse scored, and with item values of 8 and 9 replaced with NA.
-## Also illustrates the effect of setting keepNvalid = TRUE.
+## NOW scoring the items in exampleDat
+
+## Returns data frame with ONLY scale scores
+(scoredDat <- scoreFACT_M(exampleDat))
+
+## Using the id argument (makes merging with original data more fool-proof):
+(scoredDat <- scoreFACT_M(exampleDat, id = "ID"))
+
+## Merge back with original data, exampleDat:
+mergeDat <- merge(exampleDat, scoredDat, by = "ID")
+names(mergeDat)
+
+## Returns scale scores, plus recoded items (updateItems = TRUE)
+## Also illustrates effect of setting keepNvalid = TRUE.
 scoredDat <- scoreFACT_M(exampleDat, updateItems = TRUE, keepNvalid = TRUE)
 names(scoredDat)
 ## Descriptives of scored scales
-summary(scoredDat[, c('PWB', 'SWB', 'EWB', 'FWB', 'FACTG', 
+summary(scoredDat[, c('PWB', 'SWB', 'EWB', 'FWB', 'FACTG',
                       'MS', 'MSS', 'FACT_M_TOTAL', 'FACT_M_TOI')])
+
+## If ONLY the "Additional Concerns" items are in df, use AConly = TRUE
+(scoredDat <- scoreFACT_M(exampleDat, AConly = TRUE))
+
+## AConly = TRUE with an id variable
+(scoredDat <- scoreFACT_M(exampleDat, id = "ID", AConly = TRUE))
+
+## Clean up
+rm(miss10, miss50, missMtx, exampleDat, scoredDat, mergeDat)
+}
 }
 \references{
-FACT-M Scoring Guidelines, available at \url{http://www.facit.org}
+FACT-M Scoring Guidelines, available at
+  \url{http://www.facit.org}
+
+Cormier, J., Davidson, L., Xing, Y., Webster, K., & Cella, D. (2005).
+Measuring quality of life in patients with melanoma: Development of the
+FACT-Melanoma Subscale.  \emph{The Journal of Supportive Oncology}, 3(5),
+139-145.
+}
+\seealso{
+This function is very similar to the \code{\link{scoreFACT_B}}
+  function.  To see examples of function usage, please see the documentation
+  for \code{\link{scoreFACT_B}}.  For additional details on the function
+  arguments, see \code{\link{scoreFACTG}} and \code{\link{FACTscorer}}.
 }
 

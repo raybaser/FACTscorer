@@ -4,43 +4,50 @@
 \alias{scoreFANLTC}
 \title{Score the FANLTC}
 \usage{
-scoreFANLTC(df, updateItems = FALSE, keepNvalid = FALSE)
+scoreFANLTC(df, id = NULL, updateItems = FALSE, keepNvalid = FALSE)
 }
 \arguments{
-\item{df}{A data frame with the FANLTC items, appropriately-named.}
+\item{df}{A data frame with the questionnaire items, appropriately-named.}
 
-\item{updateItems}{Logical, if \code{TRUE} any original item that is
-reverse coded for scoring will be replaced by its reverse coded version
-in the returned data frame, and any values of 8 or 9 will be replaced
-with NA.  The default, \code{FALSE}, returns the original items
-unmodified.}
+\item{id}{(optional) The quoted name of a variable in \code{df} with a unique
+value for each row of \code{df}. If an \code{id} variable is provided
+here, it will also be included with the scale scores in the output data
+frame. This can facilitate accurate merging of the scale scores back into
+the input \code{df}.}
 
-\item{keepNvalid}{Logical, if \code{TRUE} the function
-returns an additional variable for most of the returned scale scores
-containing the number of valid, non-missing responses from each
-respondent to the items on the given scale.  If \code{FALSE} (the
-default), these variables are omitted from the returned data frame.}
+\item{updateItems}{(optional) Logical, if \code{TRUE} then updated versions
+of the items (i.e., re-coded for score calculation) will be returned in the
+output data frame with the scale scores. The default, \code{FALSE}, does
+not save any updated versions of the items in the resulting data frame.
+Most users will want to omit this argument or, equivalently, set it to
+\code{FALSE}.}
+
+\item{keepNvalid}{(optional) Logical, if \code{TRUE} then the output data
+frame will have additional variables containing the number of valid,
+non-missing responses from each respondent to the items on a given scale
+(see Details). If \code{FALSE} (the default), these variables will not be
+in the returned data frame. Most users will want to omit this argument
+or, equivalently, set it to \code{FALSE}.}
 }
 \value{
-The original data frame is returned (optionally with modified
-items if \code{updateItems = TRUE}) with new variables corresponding to
-the scored scales. If \code{keepNvalid = TRUE}, for each scored scale an
-additional variable is returned that contains the number of valid
-responses each respondent made to the items making up the given scale.
-These optional variables have names of the format \code{SCALENAME_N}.
-The following scale scores are returned:
+A data frame with the following scale scores is returned:
 
-\describe{
-  \item{PWB}{Physical Well-Being subscale}
-  \item{SWB}{Social/Family Well-Being subscale}
-  \item{EWB}{Emotional Well-Being subscale}
-  \item{FWB}{Physical Well-Being subscale}
-  \item{FANLTC}{FANLTC Total Score (i.e., PWB+SWB+EWB+FWB)}
+\itemize{
+  \item \strong{PWB} - Physical Well-Being subscale
+  \item \strong{SWB} - Social/Family Well-Being subscale
+  \item \strong{EWB} - Emotional Well-Being subscale
+  \item \strong{FWB} - Physical Well-Being subscale
+  \item \strong{FANLTC} - FANLTC Total Score (PWB+SWB+EWB+FWB)
 }
+
+If a variable was given to the \code{id} argument, then that variable will
+also be in the returned data frame. Additional, relatively unimportant,
+variables will be returned if \code{updateItems = TRUE} or \code{keepNvalid =
+TRUE}.
 }
 \description{
-Generates all of the scores of the Functional Assessment of Cancer 
-Therapy-General (FANLTC) from item responses.
+Generates all of the scores of the Functional Assessment of
+Non-Life Threatening Conditions (FANLTC) from item responses.
 }
 \details{
 Given a data frame that includes all of the FANLTC items as variables,
@@ -52,6 +59,11 @@ refer to the materials provided by \url{http://www.facit.org} for the
 particular questionnaire you are using.  In particular, refer to the left
 margin of the official questionnaire (i.e., from facit.org) for the
 appropriate item variable names.
+
+Most users will want to omit the \code{updateItems} and \code{keepNvalid}
+arguments or, equivalently, set them both to \code{FALSE}. For more details
+on these arguments, see the documentation entry for \code{\link{scoreFACTG}}
+and \code{\link{FACTscorer}}.
 }
 \section{Note}{
 
@@ -63,53 +75,47 @@ This scoring function expects missing item responses to be coded as NA,
 8, or 9, and valid item responses to be coded as 0, 1, 2, 3, or 4.  Any
 other value for any of the items will result in an error message and no
 scores.
-
-Some item variables are reverse coded for the purpose of generating the
-scale scores.  The official (e.g., from \url{http://www.facit.org}) SAS
-and SPSS scoring algorithms for this questionnaire automatically replace
-the original items with their reverse-coded versions.  This can be
-confusing if you accidentally run the algorithm more than once on your
-data.  As its default, \code{scoreFANLTC} DOES NOT replace any of your
-original item variables with the reverse coded versions.  However, for
-consistentcy with the behavior of the other versions on
-\url{http://www.facit.org}, the \code{updateItems} argument is
-provided.  If set to \code{TRUE}, any item that is supposed to be
-reverse coded will be replaced with its reversed version in the data
-frame returned by \code{scoreFANLTC}.
 }
 \examples{
-set.seed(6375309)
-## Generating random item responses for 8 fake respondents
-exampleDat <- t(replicate(8, sample(0:4, size = 27, replace = TRUE)))
-## Making half of respondents missing about 10\% of items, 
-## half missing about 50\%.
-miss10 <- t(replicate(4, sample(c(0, 9), prob = c(0.9, 0.1), 
-    size = 27, replace = TRUE)))
-miss50 <- t(replicate(4, sample(c(0, 9), prob = c(0.5, 0.5), 
-    size = 27, replace = TRUE)))
-missMtx <- rbind(miss10, miss50)
-## Using 9 as the code for missing responses
-exampleDat[missMtx == 9] <- 9
-exampleDat <- as.data.frame(cbind(ID = paste0('ID', 1:8), 
-    as.data.frame(exampleDat)))
-names(exampleDat) <- c('ID', 'GP1', 'GP2', 'GP3', 'GP4', 'GP5',
-    'GP6', 'GP7', 'GS1', 'GS2', 'GS3', 'GS4', 'GS5', 'GS6', 
-    'GS7', 'GE1', 'GE2', 'GE3', 'GE4', 'GE5', 'GE6', 'GF1', 
-    'GF2', 'GF3', 'GF4', 'GF5', 'GF6', 'GF7')
+\dontshow{
+## FIRST creating a df with fake item data to score
+exampleDat <- make_FACTdata()
 
-## Returns data frame with scale scores and with original items untouched
+## NOW scoring the items in exampleDat
+
+## Returns data frame with ONLY scale scores
 scoredDat <- scoreFANLTC(exampleDat)
-names(scoredDat)
 scoredDat
-## Returns data frame with scale scores, with the appropriate items
-## reverse scored, and with item values of 8 and 9 replaced with NA.
-## Also illustrates the effect of setting keepNvalid = TRUE.
+
+## Using the id argument (makes merging with original data more fool-proof):
+scoredDat <- scoreFANLTC(exampleDat, id = "ID")
+scoredDat
+## Merge back with original data, exampleDat:
+mergeDat <- merge(exampleDat, scoredDat, by = "ID")
+names(mergeDat)
+
+## Returns scale scores, plus recoded items (updateItems = TRUE)
+## Also illustrates effect of setting keepNvalid = TRUE.
 scoredDat <- scoreFANLTC(exampleDat, updateItems = TRUE, keepNvalid = TRUE)
 names(scoredDat)
 ## Descriptives of scored scales
 summary(scoredDat[, c('PWB', 'SWB', 'EWB', 'FWB', 'FANLTC')])
 }
+}
 \references{
 FANLTC Scoring Guidelines, available at \url{http://www.facit.org}
+
+Cella, D., & Nowinski, C. J. (2002). Measuring quality of life in chronic
+illness: The functional assessment of chronic illness therapy measurement
+system. Archives of Physical Medicine and Rehabilitation, 83, Supplement 2,
+S10–S17.
+}
+\seealso{
+See \code{\link{FACTscorer}} for more comprehensive information
+  about using the functions in this package.  This function is very similar
+  to the \code{\link{scoreFACTG}} function.  See the documentation for
+  \code{\link{scoreFACTG}} for more details on the arguments and for
+  examples.  For brevity, examples are omitted below, but can be accessed by
+  running \code{example(scoreFANLTC)}.
 }
 
