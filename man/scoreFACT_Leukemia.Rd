@@ -86,10 +86,11 @@ Given a data frame that includes all of the FACT-Leukemia (Version
   see the documentation entry for \code{\link{scoreFACTG}} and
   \code{\link{FACTscorer}}.
 }
-\section{Note}{
+\section{If you get an error message}{
 
-  Keep in mind that this function (and R in general) is
-  case-sensitive.
+  Keep in mind that this function (and R in general) is case-sensitive.
+  Items should be named according to FACT conventions (see \code{Details}
+  above).
 
   All items in \code{df} should be \code{numeric} (i.e., of type
   \code{integer} or \code{double}).

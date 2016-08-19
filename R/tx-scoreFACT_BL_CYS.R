@@ -2,7 +2,7 @@
 #'
 #' @description
 #' Generates all of the scores of the Functional Assessment of Cancer Therapy -
-#' BL-CYS (FACT-BL-CYS, v4) from item responses.
+#' Bladder-Cystectomy (FACT-BL-CYS, v4) from item responses.
 #'
 #' @templateVar MEASURE FACT-BL-CYS
 #' @templateVar SCOREFUN scoreFACT_BL_CYS
@@ -35,15 +35,24 @@
 #' @references FACT-BL-CYS Scoring Guidelines, available at
 #'   \url{http://www.facit.org}
 #'
-#'
+#' @section NOTE - Recent Questionnaire and Scoring Changes:
+#' You might also get an error due to recent changes to the questionnaire.
+#' The official questionnaire and scoring was changed slightly on March 22,
+#' 2016.  Apparently, the older version had incorrect item labels for 2 of the
+#' items.  These item labels, but not the wording of the items themselves, were
+#' changed in March 2016.  Specifically, the item labels C4 and C9 in the old
+#' version were changed to C5 and VCI2, respectively, in the March 22, 2016
+#' version.  If you get errors when you try to score your data with
+#' \code{scoreFACT_BL_CYS}, you may have the older item labels in your data
+#' frame.  Try renaming C4 to C5, and C9 to VCI2.
 #'
 #' @export
 #'
 #' @examples
 #' \dontshow{
 #' ## FIRST creating a df with fake item data to score
-#' itemNames <- c('C2', 'C3', 'C4', 'C6', 'C7', 'BL1', 'ITU7',
-#' 'ITU6', 'C9', 'ITU3', 'ITU4', 'ITU5', 'ITU1', 'VC1', 'ITU2')
+#' itemNames <- c('C2', 'C3', 'C5', 'C6', 'C7', 'BL1', 'ITU7',
+#' 'ITU6', 'VCI2', 'ITU3', 'ITU4', 'ITU5', 'ITU1', 'VC1', 'ITU2')
 #' exampleDat <- make_FACTdata(namesAC = itemNames)
 #'
 #' ## NOW scoring the items in exampleDat
@@ -78,9 +87,9 @@ scoreFACT_BL_CYS <- function(df, id = NULL, AConly = FALSE, updateItems = FALSE,
     scoreFACT_any(
       df = df,
       id = id,
-      namesAC = c("C2", "C3", "C4", "C6", "C7", "BL1", "ITU7",
-                  "ITU6", "C9", "ITU3", "ITU4", "ITU5", "ITU1", "VC1", "ITU2"),
-      namesRev = c("C2", "BL1", "ITU7", "ITU6", "C9", "ITU3", "ITU4",
+      namesAC = c("C2", "C3", "C5", "C6", "C7", "BL1", "ITU7",
+                  "ITU6", "VCI2", "ITU3", "ITU4", "ITU5", "ITU1", "VC1", "ITU2"),
+      namesRev = c("C2", "BL1", "ITU7", "ITU6", "VCI2", "ITU3", "ITU4",
                    "ITU5", "ITU2"),
       nameSub = "BL_CYS",
       nameTot = "FACT_BL_CYS",

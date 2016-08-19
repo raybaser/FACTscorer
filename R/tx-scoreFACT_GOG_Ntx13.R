@@ -1,11 +1,11 @@
-#' @title Score the FACT/GOG-Ntx-13
+#' @title Score the FACT/GOG-Ntx13
 #' 
 #' @description
-#' Generates all of the scores of the FACT/GOG-Ntx-13 (Version 4) from 
+#' Generates all of the scores of the FACT/GOG-Ntx13 (Version 4) from 
 #' item responses.
 #' 
 #' 
-#' @templateVar MEASURE FACT/GOG-Ntx-13
+#' @templateVar MEASURE FACT/GOG-Ntx13
 #' @templateVar SCOREFUN scoreFACTGOG_Ntx13
 #' @template templateDetailsAC
 #'
@@ -22,8 +22,8 @@
 #'   \item \strong{FWB} - Physical Well-Being subscale
 #'   \item \strong{FACTG} - FACT-G Total Score (PWB+SWB+EWB+FWB)
 #'   \item \strong{NtxS13} - GOG_Ntx13 subscale
-#'   \item \strong{FACTGOG_Ntx13_TOTAL} - FACT/GOG-Ntx-13 Total Score (PWB+SWB+EWB+FWB+NtxS13)
-#'   \item \strong{FACTGOG_Ntx13_TOI} - FACT/GOG-Ntx-13 Trial Outcome Index (PWB+FWB+NtxS13)
+#'   \item \strong{FACTGOG_Ntx13_TOTAL} - FACT/GOG-Ntx13 Total Score (PWB+SWB+EWB+FWB+NtxS13)
+#'   \item \strong{FACTGOG_Ntx13_TOI} - FACT/GOG-Ntx13 Trial Outcome Index (PWB+FWB+NtxS13)
 #' }
 #'
 #' If \code{AConly = TRUE}, the only scale score returned is \strong{NtxS13}.
@@ -33,7 +33,7 @@
 #' variables will be returned if \code{updateItems = TRUE} or \code{keepNvalid =
 #' TRUE}.
 #'
-#' @references FACT/GOG-Ntx-13 Scoring Guidelines, available at
+#' @references FACT/GOG-Ntx13 Scoring Guidelines, available at
 #'   \url{http://www.facit.org}
 #'
 #' 

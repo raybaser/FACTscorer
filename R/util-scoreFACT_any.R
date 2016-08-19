@@ -118,8 +118,13 @@ scoreFACT_any <- function(df,
   ## Test whether namesAC or toupper(namesAC) is in df.
   if (!is.null(namesAC)) {
     if (!all(namesAC %in% names(df)) && !all(toupper(namesAC) %in% names(df))) {
-      stop("At least 1 of the 'namesAC' variable names is not in your df.
-           Make sure they are typed correctly, and each in quotes.")
+      stop(paste(strwrap(
+        "At least 1 of the required items is not in your df,
+        or is incorrectly named.  Make sure that the items
+        in your df have names identical to those in the
+        official version of the questionnaire.",
+        indent = 0, exdent = 2, width = 60
+      ), collapse = "\n"))
       break
     }
   }

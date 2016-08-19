@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Ray Baser and Avital Elias" />
+
+<meta name="date" content="2016-08-17" />
+
+<title>Descriptions of Instruments Scored by the FACTscorer R Package</title>
+
+
+
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Descriptions of Instruments Scored by the FACTscorer R Package</h1>
+<h4 class="author"><em>Ray Baser and Avital Elias</em></h4>
+<h4 class="date"><em>2016-08-17</em></h4>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#general-measures">General Measures</a><ul>
+<li><a href="#fact-g-general">FACT-G (General)</a></li>
+</ul></li>
+<li><a href="#cancer-specific-measures">Cancer Specific Measures</a><ul>
+<li><a href="#fact-b-breast">FACT-B (Breast)</a></li>
+<li><a href="#fact-bl-bladder">FACT-Bl (Bladder)</a></li>
+<li><a href="#fact-br-brain">FACT-Br (Brain)</a></li>
+<li><a href="#fact-c-colorectal">FACT-C (Colorectal)</a></li>
+<li><a href="#fact-cns-central-nervous-system">FACT-CNS (Central Nervous System)</a></li>
+<li><a href="#fact-cx-cervical">FACT-Cx (Cervical)</a></li>
+<li><a href="#fact-e-esophageal">FACT-E (Esophageal)</a></li>
+<li><a href="#fact-en-endometrial">FACT-En (Endometrial)</a></li>
+<li><a href="#fact-ga-gastric">FACT-Ga (Gastric)</a></li>
+<li><a href="#fact-hn-head-neck">FACT-H&amp;N (Head &amp; Neck)</a></li>
+<li><a href="#fact-hep-hepatobiliary">FACT-Hep (Hepatobiliary)</a></li>
+<li><a href="#fact-l-lung">FACT-L (Lung)</a></li>
+<li><a href="#fact-leu-leukemia">FACT-Leu (Leukemia)</a></li>
+<li><a href="#fact-lym-lymphoma">FACT-Lym (Lymphoma)</a></li>
+<li><a href="#fact-m-melanoma">FACT-M (Melanoma)</a></li>
+<li><a href="#fact-mm-multiple-myeloma">FACT-MM (Multiple Myeloma)</a></li>
+<li><a href="#fact-np-nasopharyngeal">FACT-NP (Nasopharyngeal)</a></li>
+<li><a href="#fact-o-ovarian">FACT-O (Ovarian)</a></li>
+<li><a href="#fact-p-prostate">FACT-P (Prostate)</a></li>
+<li><a href="#fact-v-vulvar">FACT-V (Vulvar)</a></li>
+</ul></li>
+<li><a href="#treatment-specific-measures">Treatment Specific Measures</a><ul>
+<li><a href="#facit-ts-btcsq-bone-treatment-convenience-and-satisfaction-questionnaire">FACIT-TS-BTCSQ (Bone Treatment Convenience and Satisfaction Questionnaire)</a></li>
+<li><a href="#factgog-ntx-neurotoxicity">FACT/GOG-Ntx (Neurotoxicity)</a></li>
+<li><a href="#factgog-ntx12-neurotoxicity">FACT/GOG-Ntx12 (Neurotoxicity)</a></li>
+<li><a href="#factgog-ntx13-neurotoxicity">FACT/GOG-Ntx13 (Neurotoxicity)</a></li>
+<li><a href="#factgog-ntx4-neurotoxicity">FACT/GOG-Ntx4 (Neurotoxicity)</a></li>
+<li><a href="#fact-antia-anti-angiogenesis">FACT-AntiA (Anti-Angiogenesis)</a></li>
+<li><a href="#fact-bl-cys-bladder-cystectomy">FACT-Bl-Cys (Bladder-Cystectomy)</a></li>
+<li><a href="#fact-bmt-bone-marrow-transplant">FACT-BMT (Bone Marrow Transplant)</a></li>
+<li><a href="#fact-brm-biologic-response-modifier">FACT-BRM (Biologic Response Modifier)</a></li>
+<li><a href="#fact-ef-enteral-feeding">FACT-EF (Enteral Feeding)</a></li>
+<li><a href="#fact-egfri-18-epidermal-growth-factor-receptor-inhibitors">FACT-EGFRI-18 (Epidermal Growth Factor Receptor Inhibitors)</a></li>
+<li><a href="#fact-taxane-taxane">FACT-Taxane (Taxane)</a></li>
+</ul></li>
+<li><a href="#symptom-specific-measures">Symptom Specific Measures</a><ul>
+<li><a href="#functional-assessment-of-anorexiacachexia-therapy-faact">Functional Assessment of Anorexia/Cachexia Therapy (FAACT)</a></li>
+<li><a href="#facit-ad-abdominal-discomfort">FACIT-AD (Abdominal Discomfort)</a></li>
+<li><a href="#facit-ai-ascites-index">FACIT-AI (Ascites Index)</a></li>
+<li><a href="#facit-cd-cervical-dysplasia">FACIT-CD (Cervical Dysplasia)</a></li>
+<li><a href="#facit-d-diarrhea">FACIT-D (Diarrhea)</a></li>
+<li><a href="#facit-f-fatigue">FACIT-F (Fatigue)</a></li>
+<li><a href="#facit-fatigue-fatigue">FACIT-Fatigue (Fatigue)</a></li>
+<li><a href="#fact-an-anemia">FACT-An (Anemia)</a></li>
+<li><a href="#fact-b4-arm-morbidity">FACT-B+4 (Arm Morbidity)</a></li>
+<li><a href="#fact-bp-bone-pain">FACT-BP (Bone Pain)</a></li>
+<li><a href="#fact-cog-cognitive">FACT-Cog (Cognitive)</a></li>
+<li><a href="#fact-es-endocrine-symptoms">FACT-ES (Endocrine Symptoms)</a></li>
+<li><a href="#fact-n-neutropenia">FACT-N (Neutropenia)</a></li>
+<li><a href="#fact-th11-thrombocytopenia">FACT-Th11 (Thrombocytopenia)</a></li>
+<li><a href="#fact-th18-thrombocytopenia">FACT-Th18 (Thrombocytopenia)</a></li>
+<li><a href="#fait-f-fecal">FAIT-F (Fecal)</a></li>
+<li><a href="#fait-u-urinary">FAIT-U (Urinary)</a></li>
+</ul></li>
+</ul>
+</div>
+
+<p>This vignette includes descriptions of the major instruments scored by the FACTscorer (add link) package.</p>
+<p>The original motivation for writing these descriptions was to ease the burden of writing research protocols for studies with quality of life (QOL) or other patient-reported outcome (PRO) measures as endpoints. Balances time with rigor needed.</p>
+<p>Each description is written with sufficient detail to be included in formal research protocol documents that utilize the instrument as an outcome measure.</p>
+<p>They are also suitable for the “Measures” subsection of manuscripts reporting the results of such studies (potentially with editing, to meet word limits). They were written with these purposes in mind, and follow the SCOPE guielines (RAY: check this, and add citations).</p>
+<p>Each instrument description is complete with relevant references.</p>
+<p>For protocols, the following modifications are needed: - Update in-text citation numbers and reference section. - State which of the multiple scored scales are of interest to the study objectives.</p>
+<p>Please include the FACTscorer citation, or cite this vignette document. The reference for this vignette document is:</p>
+<ul>
+<li>Baser, RE, Elias, A, (2016). Descriptions of Instruments Scored by the FACTscorer R Package. R Package Vignette version 0.2.0. <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ul>
+<div id="general-measures" class="section level1">
+<h1>General Measures</h1>
+<div id="fact-g-general" class="section level3">
+<h3>FACT-G (General)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - General (FACT-G)</strong>, Version 4, is a 27-item questionnaire assessing the general quality of life (QOL) of cancer patients.<strong>[REF 1]</strong> It is considered appropriate for use with patients with any type of cancer.<strong>[REF 2]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 5-10 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The 27 items produce 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108. For all 5 scores, higher scores indicate better QoL. Details on scoring the FACT-G can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-G can be scored in R using the “FACTscorer” package <strong>[REF 3]</strong>.</p>
+<p>In the original validation study, the FACT-G subscales demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from 0.69 (SWB) to 0.82 (PWB). The FACT-G Total Score reliability was 0.89. Additionally, the FACT-G Total Score and all subscale scores except SWB were sensitive to changes in performance status over time.<strong>[REF 1]</strong></p>
+<div id="references" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="cancer-specific-measures" class="section level1">
+<h1>Cancer Specific Measures</h1>
+<div id="fact-b-breast" class="section level3">
+<h3>FACT-B (Breast)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Breast (FACT-B)</strong>, Version 4, is a 37-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with breast cancer.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-B consists of two parts - the 27-item FACT-General (FACT-G) plus 10 “Additional Concerns” items that assess concerns specific to patients with breast cancer. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 10 “Additional Concerns” items produce the Breast Cancer Subscale (BCS) score (range 0 - 40). The FACT-B Total Score (range 0 - 148) is the sum of the 4 FACT-G subscale scores plus the BCS score. The FACT-B Trial Outcome Index (TOI, range 0 - 96) is the sum of the BCS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT-B Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT-B demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from 0.69 (SWB) to 0.86 (FWB) among the 4 general QOL subscales, 0.63 for the BCS, 0.90 for the FACT-B total score and 0.88 for the FACT-B TOI.<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-B can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-B can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-1" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li>Brady, M. J., Cella, D. F., Mo, F., Bonomi, A. E., Tulsky, D. S., Lloyd, S. R., . Shiomoto, G. (1997). Reliability and validity of the Functional Assessment of Cancer Therapy-Breast quality-of-life instrument. Journal of Clinical Oncology, 15(3), 974-986.</li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-bl-bladder" class="section level3">
+<h3>FACT-Bl (Bladder)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Bladder (FACT-Bl)</strong>, Version 4, is a 50-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with bladder cancer<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-Bl consists of two parts - the 27-item FACT-General (FACT-G) plus 12 “Additional Concerns” items that assess concerns specific to patients with bladder cancer. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 12 “Additional Concerns” items produce the Bladder Cancer Subscale (BlCS) score (range 0 - 48). The FACT-Bl Total Score (range 0 - 156) is the sum of the 4 FACT-G subscale scores plus the BlCS score. The FACT-Bl Trial Outcome Index (TOI, range 0 - 104) is the sum of the BlCS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT-Bl Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT-Bl demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from ? () to ? () among the 4 general QOL subscales and ? for the BlCS.<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-Bl can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-Bl can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-2" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-br-brain" class="section level3">
+<h3>FACT-Br (Brain)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Brain (FACT-Br)</strong>, Version 4, is a 50-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with brain malignancies.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-Br consists of two parts - the 27-item FACT-General (FACT-G) plus 23 “Additional Concerns” items that assess concerns specific to patients with brain malignancies. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 23 “Additional Concerns” items produce the Brain Cancer Subscale (BrCS) score (range 0 - 92). The FACT-Br Total Score (range 0 - 200) is the sum of the 4 FACT-G subscale scores plus the BrCS score. The FACT-Br Trial Outcome Index (TOI, range 0 - 148) is the sum of the BrCS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT-Br Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT-Br demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from 0.69 (SWB) to 0.84 (FWB) among the 4 general QOL subscales and 0.83 for the BrCS.<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-Br can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-Br can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-3" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li>Weitzner MA, Meyers CA, Gelke CK, et al. 1995. The Functional Assessment of Cancer Therapy (FACT) scale: Development of a brain subscale and revalidation of the general version (FACT-G) in patients with primary brain tumors. Cancer 75(5):1151-1161.</li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-c-colorectal" class="section level3">
+<h3>FACT-C (Colorectal)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Colorectal (FACT-C)</strong>, Version 4, is a 36-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with colorectal cancer.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-C consists of two parts - the 27-item FACT-General (FACT-G) plus 9 “Additional Concerns” items that assess concerns specific to patients with colorectal cancer. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> Of the 9 “Additional Concerns” items, 7 are scored to produce the Colorectal Cancer Subscale (CCS) score (range 0 - 28). The FACT-C Total Score (range 0 - 136) is the sum of the 4 FACT-G subscale scores plus the CCS score. The FACT-C Trial Outcome Index (TOI, range 0 - 84) is the sum of the CCS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT-C Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT-C demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from 0.71 (SWB) to 0.80 (PWB) among the 4 general QOL subscales, 0.76 for the CCS, 0.91 for the FACT-C total score and 0.89 for the FACT-C TOI.<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-C can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-C can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-4" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li>Ward, W. L., Hahn, E. A., Mo, F., Hernandez, L., Tulsky, D. S., &amp; Cella, D. (n.d.). Reliability and validity of the Functional Assessment of Cancer Therapy-Colorectal (FACT-C) quality of life instrument. Quality of Life Research, 8(3), 181-195. <a href="http://doi.org/10.1023/A:1008821826499" class="uri">http://doi.org/10.1023/A:1008821826499</a></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-cns-central-nervous-system" class="section level3">
+<h3>FACT-CNS (Central Nervous System)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Central Nervous System (FACT-CNS)</strong>, Version 4, is a 39-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with cancer in the central nervous system.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-CNS consists of two parts - the 27-item FACT-General (FACT-G) plus 12 “Additional Concerns” items that assess concerns specific to patients with cancer in the central nervous system. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 12 “Additional Concerns” items produce the Central Nervous System Subscale (CNSS) score (range 0 - 48). The FACT-CNS Total Score (range 0 - 156) is the sum of the 4 FACT-G subscale scores plus the CNSS score. The FACT-CNS Trial Outcome Index (TOI, range 0 - 104) is the sum of the CNSS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT-CNS Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT-CNS demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from ? () to ? () among the 4 general QOL subscales and ? for the CCNS<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-CNS can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-CNS can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-5" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-cx-cervical" class="section level3">
+<h3>FACT-Cx (Cervical)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Cervical (FACT-Cx)</strong>, Version 4, is a 42-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with cervical cancer.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-Cx consists of two parts - the 27-item FACT-General (FACT-G) plus 15 “Additional Concerns” items that assess concerns specific to patients with cervical cancer. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 15 “Additional Concerns” items produce the Cervical Cancer Subscale (CxCS) score (range 0 - 60). The FACT-Cx Total Score (range 0 - 168) is the sum of the 4 FACT-G subscale scores plus the CxCS score. The FACT-Cx Trial Outcome Index (TOI, range 0 - 116) is the sum of the CxCS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT-Cx Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT-Cx demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from ? () to ? () among the 4 general QOL subscales and ? for the CxCS.<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-Cx can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-Cx can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-6" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-e-esophageal" class="section level3">
+<h3>FACT-E (Esophageal)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Esophageal (FACT-E)</strong>, Version 4, is a 44-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with esophageal cancer<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-E consists of two parts - the 27-item FACT-General (FACT-G) plus 17 “Additional Concerns” items that assess concerns specific to patients with esophageal cancer. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 17 “Additional Concerns” items produce the Esophageal Cancer Subscale (ECS) score (range 0 - 68). The FACT-E Total Score (range 0 - 176) is the sum of the 4 FACT-G subscale scores plus the ECS score. The FACT-E Trial Outcome Index (TOI, range 0 - 124) is the sum of the ECS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT-E Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT-E demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from 0.72 (PWB) to 0.90 (FWB) among the 4 general QOL subscales and was found to be between 0.86 and 0.89 for the ECS depending on time recorded.<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-E can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-E can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-7" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li>Darling, G., Eton, D. T., Sulman, J., Casson, A. G., &amp; Cella, D. (2006). Validation of the functional assessment of cancer therapy esophageal cancer subscale. Cancer, 107(4), 854-863. <a href="http://doi.org/10.1002/cncr.22055" class="uri">http://doi.org/10.1002/cncr.22055</a></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-en-endometrial" class="section level3">
+<h3>FACT-En (Endometrial)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Endometrial (FACT-En)</strong>, Version 4, is a 43-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with endometrial cancer.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-En consists of two parts - the 27-item FACT-General (FACT-G) plus 16 “Additional Concerns” items that assess concerns specific to patients with endometrial cancer. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 16 “Additional Concerns” items produce the Endometrial Cancer Subscale (EnCS) score (range 0 - 64). The FACT-En Total Score (range 0 - 172) is the sum of the 4 FACT-G subscale scores plus the EnCS score. The FACT-En Trial Outcome Index (TOI, range 0 - 120) is the sum of the EnCS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT-En Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT-En demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from ? () to ? () among the 4 general QOL subscales and 0.79 for the EnCS.<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-En can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-En can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-8" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-ga-gastric" class="section level3">
+<h3>FACT-Ga (Gastric)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Gastric (FACT-Ga)</strong>, Version 4, is a 46-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with gastric cancer.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-Ga consists of two parts - the 27-item FACT-General (FACT-G) plus 19 “Additional Concerns” items that assess concerns specific to patients with gastric cancer. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 19 “Additional Concerns” items produce the Gastric Cancer Subscale (GaCS) score (range 0 - 76). The FACT-Ga Total Score (range 0 - 184) is the sum of the 4 FACT-G subscale scores plus the GaCS score. The FACT-Ga Trial Outcome Index (TOI, range 0 - 132) is the sum of the GaCS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT-Ga Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT-Ga demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from 0.60 (EWB) to 0.85 (PWB) among the 4 general QOL subscales and 0.86 for the GaCS.<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-Ga can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-Ga can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-9" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li>Garland, S. N., Pelletier, G., Lawe, A., Biagioni, B. J., Easaw, J., Eliasziw, M., . Bathe, O. F. (2011). Prospective evaluation of the reliability, validity, and minimally important difference of the functional assessment of cancer therapy-gastric (FACT-Ga) quality-of-life instrument. Cancer, 117(6), 1302-1312. <a href="http://doi.org/10.1002/cncr.25556" class="uri">http://doi.org/10.1002/cncr.25556</a></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-hn-head-neck" class="section level3">
+<h3>FACT-H&amp;N (Head &amp; Neck)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Head &amp; Neck (FACT-H&amp;N)</strong>, Version 4, is a 39-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with head and neck cancer.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-H&amp;N consists of two parts - the 27-item FACT-General (FACT-G) plus 12 “Additional Concerns” items that assess concerns specific to patients with brain malignancies. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> Of the 12 “Additional Concerns” items, 10 are scored to produce the Head &amp; Neck Cancer Subscale (HNCS) score (range 0 - 40). The FACT-H&amp;N Total Score (range 0 - 148) is the sum of the 4 FACT-G subscale scores plus the HNCS score. The FACT-H&amp;N Trial Outcome Index (TOI, range 0 - 96) is the sum of the HNCS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT-H&amp;N Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT-H&amp;N demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from 0.59 (SWB and EWB) to 0.79 (PWB) among the 4 general QOL subscales and 0.63 for the HNCS.<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-H&amp;N can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-H&amp;N can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-10" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li>List, M. A., D’Antonio, L. L., Cella, D. F., Siston, A., Mumby, P., Haraf, D., &amp; Vokes, E. (1996). The Performance Status Scale for Head and Neck Cancer Patients and the Functional Assessment of Cancer Therapy-Head and Neck Scale. A study of utility and validity. Cancer, 77(11), 2294-2301. <a href="http://doi.org/10.1002/(SICI)1097-0142(19960601)77:11" class="uri">http://doi.org/10.1002/(SICI)1097-0142(19960601)77:11</a>&lt;2294::AID-CNCR17&gt;3.0.CO;2-S</li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-hep-hepatobiliary" class="section level3">
+<h3>FACT-Hep (Hepatobiliary)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Hepatobiliary (FACT-Hep)</strong>, Version 4, is a 45-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with hepatobiliary cancer.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-Hep consists of two parts - the 27-item FACT-General (FACT-G) plus 18 “Additional Concerns” items that assess concerns specific to patients with hepatobiliary cancer. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 18 “Additional Concerns” items produce the Hepatobiliary Cancer Subscale (HCS) score (range 0 - 72). The FACT-Hep Total Score (range 0 - 180) is the sum of the 4 FACT-G subscale scores plus the HCS score. The FACT-Hep Trial Outcome Index (TOI, range 0 - 128) is the sum of the HCS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT-Hep Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT-Hep demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from 0.72 (SWB) to 0.84 (FWB) among the 4 general QOL subscales and 0.83 for the HCS.<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-Hep can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-Hep can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-11" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li>Heffernan, N., Cella, D., Webster, K., Odom, L., Martone, M., Passik, S., . Blumgart, L. (2002). Measuring health-related quality of life in patients with hepatobiliary cancers: the functional assessment of cancer therapy-hepatobiliary questionnaire. Journal of Clinical Oncology: Official Journal of the American Society of Clinical Oncology, 20(9), 2229-2239.</li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-l-lung" class="section level3">
+<h3>FACT-L (Lung)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Lung (FACT-L)</strong>, Version 4, is a 36-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with lung cancer.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-L consists of two parts - the 27-item FACT-General (FACT-G) plus 9 “Additional Concerns” items that assess concerns specific to patients with lung cancer. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> Of the 9 “Additional Concerns” items, 7 are scored to produce the Lung Cancer Subscale (LCS) score (range 0 - 28). The FACT-L Total Score (range 0 - 136) is the sum of the 4 FACT-G subscale scores plus the LCS score. The FACT-L Trial Outcome Index (TOI, range 0 - 84) is the sum of the LCS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT-L Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT-L demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from 0.56 (SWB) to 0.80 (FWB) among the 4 general QOL subscales and 0.68 for the LCS.<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-L can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-L can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-12" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li>Cella, D. F., Bonomi, A. E., Lloyd, S. R., Tulsky, D. S., Kaplan, E., &amp; Bonomi, P. (1995). Reliability and validity of the Functional Assessment of Cancer Therapy-Lung (FACT-L) quality of life instrument. Lung Cancer (Amsterdam, Netherlands), 12(3), 199-220.</li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-leu-leukemia" class="section level3">
+<h3>FACT-Leu (Leukemia)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Leukemia (FACT-Leu)</strong>, Version 4, is a 44-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with leukemia.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-Leu consists of two parts - the 27-item FACT-General (FACT-G) plus 17 “Additional Concerns” items that assess concerns specific to patients with leukemia. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 17 “Additional Concerns” items produce the Leukemia Subscale (LEUS) score (range 0 - 68). The FACT-Leu Total Score (range 0 - 176) is the sum of the 4 FACT-G subscale scores plus the LEUS score. The FACT-Leu Trial Outcome Index (TOI, range 0 - 124) is the sum of the LEUS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT-Leu Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT-Leu demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from 0.77 (EWB) to 0.89 (PWB) among the 4 general QOL subscales, 0.86 for the LEUS, 0.95 for the FACT-Leu total score and 0.94 for the FACT-Leu TOI.<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-Leu can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-Leu can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-13" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li>Cella, D., Jensen, S. E., Webster, K., Hongyan, D., Lai, J.-S., Rosen, S., . Yount, S. (2012). Measuring health-related quality of life in leukemia: the Functional Assessment of Cancer Therapy–Leukemia (FACT-Leu) questionnaire. Value in Health: The Journal of the International Society for Pharmacoeconomics and Outcomes Research, 15(8), 1051-1058. <a href="http://doi.org/10.1016/j.jval.2012.08.2210" class="uri">http://doi.org/10.1016/j.jval.2012.08.2210</a></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-lym-lymphoma" class="section level3">
+<h3>FACT-Lym (Lymphoma)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Lymphoma (FACT-Lym)</strong>, Version 4, is a 42-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with Lymphoma.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-Lym consists of two parts - the 27-item FACT-General (FACT-G) plus 15 “Additional Concerns” items that assess concerns specific to patients with lymphoma. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 15 “Additional Concerns” items produce the Lymphoma Subscale (LYMS) score (range 0 - 60). The FACT-Lym Total Score (range 0 - 168) is the sum of the 4 FACT-G subscale scores plus the LYMS score. The FACT-Lym Trial Outcome Index (TOI, range 0 - 116) is the sum of the LYMS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT-Lym Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT-Lym demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from 0.70 (EWB) to 0.89 (FWB) among the 4 general QOL subscales and was found to be between 0.90 and 0.95 for the LYMS depending on the time recorded.<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-Lym can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-Lym can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-14" class="section level4">
+<h4>REFERENCES:</h4>
+<p>1.Hlubocky, F. J., Webster, K., Cashy, J., Beaumont, J., Cella, D.(2013). The Development and Validation of a Measure of Health-Related Quality of Life for Non-Hodgkin’s Lymphoma: The Functional Assessment of Cancer Therapy-Lymphoma (FACT-Lym). Lymphoma, 2013, e147176. <a href="http://doi.org/10.1155/2013/147176" class="uri">http://doi.org/10.1155/2013/147176</a> 2. Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003). 3. Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579. 4. Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></p>
+</div>
+</div>
+<div id="fact-m-melanoma" class="section level3">
+<h3>FACT-M (Melanoma)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Melanoma (FACT-M)</strong>, Version 4, is a 51-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with Melanoma.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>THIS ONE HAS TWO ADDITIONAL CONCERNS SECTIONS</p>
+<div id="references-15" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-mm-multiple-myeloma" class="section level3">
+<h3>FACT-MM (Multiple Myeloma)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Brain (FACT-Br)</strong>, Version 4, is a 41-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with multiple myeloma.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-MM consists of two parts - the 27-item FACT-General (FACT-G) plus 14 “Additional Concerns” items that assess concerns specific to patients with multiple myeloma. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 14 “Additional Concerns” items produce the Multiple Myeloma Subscale (MMS) score (range 0 - 56). The FACT-MM Total Score (range 0 - 164) is the sum of the 4 FACT-G subscale scores plus the MMS score. The FACT-MM Trial Outcome Index (TOI, range 0 - 112) is the sum of the MMS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT-MM Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT-MM demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from ? () to ? () among the 4 general QOL subscales and ? for the MMS.<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-MM can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-MM can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-16" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-np-nasopharyngeal" class="section level3">
+<h3>FACT-NP (Nasopharyngeal)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Nasopharyngeal (FACT-NP)</strong>, Version 4, is a 43-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with nasopharyngeal cancer.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-NP consists of two parts - the 27-item FACT-General (FACT-G) plus 16 “Additional Concerns” items that assess concerns specific to patients with nasopharyngeal cancer. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 16 “Additional Concerns” items produce the Nasopharyngeal Subscale (NPS) score (range 0 - 64). The FACT-NP Total Score (range 0 - 172) is the sum of the 4 FACT-G subscale scores plus the NPS score. The FACT-NP Trial Outcome Index (TOI, range 0 - 120) is the sum of the NPS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT-NP Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT-NP demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from 0.84 (EWB) to 0.90 (FWB) among the 4 general QOL subscales and 0.87 for the NPS.<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-NP can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-NP can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-17" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li>Tong, M. C. F., Lo, P. S. Y., Wong, K. H., Yeung, R. M. W., van Hasselt, C. A., Eremenco, S., &amp; Cella, D. (2009). Development and validation of the functional assessment of cancer therapy nasopharyngeal cancer subscale. Head &amp; Neck, 31(6), 738-747. <a href="http://doi.org/10.1002/hed.21023" class="uri">http://doi.org/10.1002/hed.21023</a></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-o-ovarian" class="section level3">
+<h3>FACT-O (Ovarian)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Ovarian (FACT-O)</strong>, Version 4, is a 39-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with ovarian cancer.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-O consists of two parts - the 27-item FACT-General (FACT-G) plus 12 “Additional Concerns” items that assess concerns specific to patients with ovarian cancer. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> Of the 12 “Additional Concerns” items, 11 are scored to produce the Ovarian Cancer Subscale (OCS) score (range 0 - 44). The FACT-O Total Score (range 0 - 152) is the sum of the 4 FACT-G subscale scores plus the OCS score. The FACT-O Trial Outcome Index (TOI, range 0 - 100) is the sum of the OCS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT-O Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT-O demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from 0.75 (SWB) to 0.88 (PWB) among the 4 general QOL subscales and 0.92 for the OCS.<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-O can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-O can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-18" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li>Basen-Engquist, K., Bodurka-Bevers, D., Fitzgerald, M. A., Webster, K., Cella, D., Hu, S., &amp; Gershenson, D. M. (2001). Reliability and validity of the functional assessment of cancer therapy-ovarian. Journal of Clinical Oncology: Official Journal of the American Society of Clinical Oncology, 19(6), 1809-1817.</li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-p-prostate" class="section level3">
+<h3>FACT-P (Prostate)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Prostate (FACT-P)</strong>, Version 4, is a 39-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with prostate cancer.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-P consists of two parts - the 27-item FACT-General (FACT-G) plus 12 “Additional Concerns” items that assess concerns specific to patients with prostate cancer. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 12 “Additional Concerns” items produce the Prostate Cancer Subscale (PCS) score (range 0 - 48). The FACT-P Total Score (range 0 - 156) is the sum of the 4 FACT-G subscale scores plus the PCS score. The FACT-P Trial Outcome Index (TOI, range 0 - 104) is the sum of the PCS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT-P Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT-P demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from 0.64 (PWB) to 0.83 (FWB) among the 4 general QOL subscales and 0.89 for the PCS.<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-P can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-P can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-19" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li>Esper, P., Mo, F., Chodak, G., Sinner, M., Cella, D., &amp; Pienta, K. J. (1997). Measuring quality of life in men with prostate cancer using the functional assessment of cancer therapy-prostate instrument. Urology, 50(6), 920-928. <a href="http://doi.org/10.1016/S0090-4295(97)00459-7" class="uri">http://doi.org/10.1016/S0090-4295(97)00459-7</a></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-v-vulvar" class="section level3">
+<h3>FACT-V (Vulvar)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Vulvar (FACT-V)</strong>, Version 4, is a 46-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with vulvar cancer.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-V consists of two parts - the 27-item FACT-General (FACT-G) plus 19 “Additional Concerns” items that assess concerns specific to patients with vulvar cancer. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 19 “Additional Concerns” items produce the Vulvar Cancer Subscale (VCS) score (range 0 - 76). The FACT-V Total Score (range 0 - 184) is the sum of the 4 FACT-G subscale scores plus the VCS score. The FACT-V Trial Outcome Index (TOI, range 0 - 132) is the sum of the VCS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT-V Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT-V demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from 0.75 (EWB) to 0.88 (FWB) among the 4 general QOL subscales and 0.82 for the VCS.<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-V can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-V can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-20" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li>Janda, M., Obermair, A., Cella, D., Perrin, L. C., Nicklin, J. L., Ward, B. G., . Trimmel, M. (2005). The functional assessment of cancer-vulvar: reliability and validity. Gynecologic Oncology, 97(2), 568-575. <a href="http://doi.org/10.1016/j.ygyno.2005.01.047" class="uri">http://doi.org/10.1016/j.ygyno.2005.01.047</a></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+<p>MICRA?</p>
+</div>
+</div>
+</div>
+<div id="treatment-specific-measures" class="section level1">
+<h1>Treatment Specific Measures</h1>
+<div id="facit-ts-btcsq-bone-treatment-convenience-and-satisfaction-questionnaire" class="section level3">
+<h3>FACIT-TS-BTCSQ (Bone Treatment Convenience and Satisfaction Questionnaire)</h3>
+<p><strong>The Functional Assessment of Chronic Illness Therapy - Bone Treatment Convenience and Satisfaction Questionnaire (FACIT-TS-BTCSQ)</strong></p>
+<p>SINGLE SCORE, TWO questionnaires</p>
+<p>More specific details on scoring the FACIT-TS-BTCSQ can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACIT-TS-BTCSQ can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-21" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="factgog-ntx-neurotoxicity" class="section level3">
+<h3>FACT/GOG-Ntx (Neurotoxicity)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy/ Gynecologic Oncology Group - Neurotoxicity (FACT/GOG-Ntx)</strong>, Version 4, is a 38-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with chemotherapy induced neuropathy.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT/GOG-Ntx consists of two parts - the 27-item FACT-General (FACT-G) plus 11 “Additional Concerns” items that assess concerns specific to patients with chemotherapy induced neuropathy. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 11 “Additional Concerns” items produce the Neurotoxicity Subscale (NtxS) score (range 0 - 44). The FACT/GOG-Ntx Total Score (range 0 - 152) is the sum of the 4 FACT-G subscale scores plus the NtxS score. The FACT/GOG-Ntx Trial Outcome Index (TOI, range 0 - 100) is the sum of the NtxS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT/GOG-Ntx Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT/GOG-Ntx demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from 0.51 (SWB) to 0.84 (FWB) among the 4 general QOL subscales and 0.81 for the NtxS<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT/GOG-Ntx can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT/GOG-Ntx can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-22" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li>Calhoun, E. A., Welshman, E. E., Chang, C.-H., Lurain, J. R., Fishman, D. A., Hunt, T. L., &amp; Cella, D. (2003). Psychometric evaluation of the Functional Assessment of Cancer Therapy/Gynecologic Oncology Group-Neurotoxicity (Fact/GOG-Ntx) questionnaire for patients receiving systemic chemotherapy. International Journal of Gynecological Cancer: Official Journal of the International Gynecological Cancer Society, 13(6), 741-748.</li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="factgog-ntx12-neurotoxicity" class="section level3">
+<h3>FACT/GOG-Ntx12 (Neurotoxicity)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy/ Gynecologic Oncology Group - Neurotoxicity (FACT/GOG-Ntx12)</strong>, Version 4, is a 39-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with chemotherapy induced neuropathy.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT/GOG-Ntx12 consists of two parts - the 27-item FACT-General (FACT-G) plus 12 “Additional Concerns” items that assess concerns specific to patients with chemotherapy induced neuropathy. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 12 “Additional Concerns” items produce the Neurotoxicity Subscale (NtxS) score (range 0 - 48). The FACT/GOG-Ntx12 Total Score (range 0 - 156) is the sum of the 4 FACT-G subscale scores plus the NtxS score. The FACT/GOG-Ntx12 Trial Outcome Index (TOI, range 0 - 104) is the sum of the NtxS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT/GOG-Ntx12 Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT/GOG-Ntx12 demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from ? () to ? () among the 4 general QOL subscales and ? for the NtxS<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT/GOG-Ntx12 can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT/GOG-Ntx12 can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-23" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="factgog-ntx13-neurotoxicity" class="section level3">
+<h3>FACT/GOG-Ntx13 (Neurotoxicity)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy/ Gynecologic Oncology Group - Neurotoxicity (FACT/GOG-Ntx13)</strong>, Version 4, is a 40-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with chemotherapy induced neuropathy.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT/GOG-Ntx13 consists of two parts - the 27-item FACT-General (FACT-G) plus 13 “Additional Concerns” items that assess concerns specific to patients with chemotherapy induced neuropathy. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 13 “Additional Concerns” items produce the Neurotoxicity Subscale (NtxS) score (range 0 - 52). The FACT/GOG-Ntx13 Total Score (range 0 - 160) is the sum of the 4 FACT-G subscale scores plus the NtxS score. The FACT/GOG-Ntx13 Trial Outcome Index (TOI, range 0 - 108) is the sum of the NtxS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT/GOG-Ntx13 Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT/GOG-Ntx13 demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from ? () to ? () among the 4 general QOL subscales and ? for the NtxS<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT/GOG-Ntx13 can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT/GOG-Ntx13 can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-24" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="factgog-ntx4-neurotoxicity" class="section level3">
+<h3>FACT/GOG-Ntx4 (Neurotoxicity)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy/ Gynecologic Oncology Group - Neurotoxicity (FACT/GOG-Ntx4)</strong> Version 4, is a 4-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with chemotherapy induced neuropathy.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 15-10 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The 4 items produce the FACT/GOG-Ntx4 score (range 0 - 16). Higher scores indicate better QoL. In the original validation study, the FACT/GOG-Ntx4 demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from ? () to ? () among the 4 general QOL subscales and ? for the NtxS<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT/GOG-Ntx4 can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT/GOG-Ntx4 can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-25" class="section level4">
+<h4>REFERENCES:</h4>
+<p>1.Huang, H. Q., Brady, M. F., Cella, D., &amp; Fleming, G. (2007). Validation and reduction of FACT/GOG-Ntx subscale for platinum/paclitaxel-induced neurologic symptoms: a gynecologic oncology group study. International Journal of Gynecological Cancer: Official Journal of the International Gynecological Cancer Society, 17(2), 387-393. <a href="http://doi.org/10.1111/j.1525-1438.2007.00794.x" class="uri">http://doi.org/10.1111/j.1525-1438.2007.00794.x</a> 2. Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003). 3. Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579. 4. Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></p>
+</div>
+</div>
+<div id="fact-antia-anti-angiogenesis" class="section level3">
+<h3>FACT-AntiA (Anti-Angiogenesis)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Anti-Angiogenesis (FACT-AntiA)</strong> Version 4, is a 50-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients receiving Anti-Angiogenesis therapy.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-AntiA consists of two parts - the 27-item FACT-General (FACT-G) plus 23 “Additional Concerns” items that assess concerns specific to patients receiving Anti-Angiogenesis therapy. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 23 “Additional Concerns” items produce the Anti-Angiogenesis Subscale (AntiA) score (range 0 - 92). The FACT-AntiA Total Score (range 0 - 200) is the sum of the 4 FACT-G subscale scores plus the AntiA score. The FACT-AntiA Trial Outcome Index (TOI, range 0 - 148) is the sum of the AntiA score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT-AntiA Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT-AntiA demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from ? () to ? () among the 4 general QOL subscales and ? for the AntiA<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-AntiA can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-AntiA can be scored in R using the “FACTscorer” package.**[R</p>
+<div id="references-26" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li>Kaiser, K., Beaumont, J. L., Webster, K., Yount, S. E., Wagner, L. I., Kuzel, T. M., &amp; Cella, D. (2015). Development and validation of the functional assessment of cancer therapy-antiangiogenesis subscale. Cancer Medicine, 4(5), 690-698. <a href="http://doi.org/10.1002/cam4.385" class="uri">http://doi.org/10.1002/cam4.385</a></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-bl-cys-bladder-cystectomy" class="section level3">
+<h3>FACT-Bl-Cys (Bladder-Cystectomy)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Bladder-Cystectomy (FACT-Bl-Cys)</strong>, Version 4, is a 44-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with bladder cancer undergoing cystectomy.<strong>[REF 1]</strong> It was previously known as FACT-Vanderbilt Cystectomy Index (FACT-VCI). The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-Bl-Cys consists of two parts - the 27-item FACT-General (FACT-G) plus 17 “Additional Concerns” items that assess concerns specific to patients with bladder cancer undergoing cystectomy. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> Of the 17 “Additional Concerns” items, 15 are scored to produce the Bladder-Cystectomy Subscale (BL-CYS) score (range 0 - 60). The FACT-Bl-Cys Total Score (range 0 - 168) is the sum of the 4 FACT-G subscale scores plus the BL-CYS score. The FACT-Bl-Cys Trial Outcome Index (TOI, range 0 - 116) is the sum of the BL-CYS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT-Bl-Cys Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT-Bl-Cys demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from ? () to ? () among the 4 general QOL subscales and ? for the BL-CYS<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-Bl-Cys can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-Bl-Cys can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-27" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li>Anderson, C. B., Feurer, I. D., Large, M. C., Steinberg, G. D., Barocas, D. A., Cookson, M. S., &amp; Penson, D. F. (2012). Psychometric characteristics of a condition-specific, health-related quality-of-life survey: the FACT-Vanderbilt Cystectomy Index. Urology, 80(1), 77-83. <a href="http://doi.org/10.1016/j.urology.2012.01.090" class="uri">http://doi.org/10.1016/j.urology.2012.01.090</a></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-bmt-bone-marrow-transplant" class="section level3">
+<h3>FACT-BMT (Bone Marrow Transplant)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Bone Marrow Transplant (FACT-BMT)</strong>, Version 4, is a 39-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients undergoing bone marrow transplantation.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-BMT consists of two parts - the 27-item FACT-General (FACT-G) plus 12 “Additional Concerns” items that assess concerns specific to patients with bladder cancer undergoing cystectomy. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> Of the 12 “Additional Concerns” items, 10 are scored to produce the Bone Marrow Transplant Subscale (BMTS) score (range 0 - 40). The FACT-BMT Total Score (range 0 - 148) is the sum of the 4 FACT-G subscale scores plus the BMTS score. The FACT-BMT Trial Outcome Index (TOI, range 0 - 96) is the sum of the BMTS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT-BMT Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT-BMT demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from 0.67 (EWB) to 0.84 (PWB) among the 4 general QOL subscales, 0.63 for the BMTS, 0.90 for the FACT-BMT total score and .87 for the FACT-BMT TOI.<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-BMT can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-BMT can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-28" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li>McQuellon, R. P., Russell, G. B., Cella, D. F., Craven, B. L., Brady, M., Bonomi, A., &amp; Hurd, D. D. (1997). Quality of life measurement in bone marrow transplantation: development of the Functional Assessment of Cancer Therapy-Bone Marrow Transplant (FACT-BMT) scale. Bone Marrow Transplantation, 19(4), 357-368. <a href="http://doi.org/10.1038/sj.bmt.1700672" class="uri">http://doi.org/10.1038/sj.bmt.1700672</a></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-brm-biologic-response-modifier" class="section level3">
+<h3>FACT-BRM (Biologic Response Modifier)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Biologic Response Modifier (FACT-BRM)</strong>, Version 4, is a 40-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients receiving biologic response modifiers.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-BRM consists of…</p>
+<p>THERE ARE TWO BRM SUBSCALES</p>
+<p>….</p>
+<p>In the original validation study, the FACT-BRM demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from 0.61 (SWB) to 0.83 (FWB) among the 4 general QOL subscales, 0.70 for the BRMP, ? for the BRMCE, 0.92 for the FACT-BRM total score and .91 for the FACT-BRM TOI.<strong>[REF 1]</strong></p>
+<div id="references-29" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li>Bacik, J., Mazumdar, M., Murphy, B. A., Fairclough, D. L., Eremenco, S., Mariani, T., . Cella, D. (2004). The functional assessment of cancer therapy-BRM (FACT-BRM): a new tool for the assessment of quality of life in patients treated with biologic response modifiers. Quality of Life Research: An International Journal of Quality of Life Aspects of Treatment, Care and Rehabilitation, 13(1), 137-154.</li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-ef-enteral-feeding" class="section level3">
+<h3>FACT-EF (Enteral Feeding)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Enteral Feeding (FACT-EF)</strong> Version 4, is a 20-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients receiving enteral feeding.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The items produce the FACT-EF score (range 0 - 80). Higher scores indicate better QoL. In the original validation study, the FACT-EF demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from ? () to ? () among the 4 general QOL subscales and ? for the FACT-EF<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-EF can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-EF can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-30" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-egfri-18-epidermal-growth-factor-receptor-inhibitors" class="section level3">
+<h3>FACT-EGFRI-18 (Epidermal Growth Factor Receptor Inhibitors)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Epidermal Growth Factor Receptor Inhibitors (FACT-EGFRI-18)</strong> Version 4, is a 18-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients treated with EGFRI-18 inhibitors.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The items produce the FACT-EGFRI-18 (range 0 - 72). Higher scores indicate better QoL. In the original validation study, the FACT-EGFRI-18 demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from ? () to ? () among the 4 general QOL subscales and ? for the FACT-EGFRI-18<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-EGFRI-18 can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-EGFRI-18 can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-31" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li>Wagner, L. I., Berg, S. R., Gandhi, M., Hlubocky, F. J., Webster, K., Aneja, M., . Lacouture, M. E. (2013). The development of a Functional Assessment of Cancer Therapy (FACT) questionnaire to assess dermatologic symptoms associated with epidermal growth factor receptor inhibitors (FACT-EGFRI-18). Supportive Care in Cancer: Official Journal of the Multinational Association of Supportive Care in Cancer, 21(4), 1033-1041. <a href="http://doi.org/10.1007/s00520-012-1623-4" class="uri">http://doi.org/10.1007/s00520-012-1623-4</a></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-taxane-taxane" class="section level3">
+<h3>FACT-Taxane (Taxane)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Taxane (FACT-Taxane)</strong>, Version 4, is a 43-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients receiving taxane therapy.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-Taxane consists of two parts - the 27-item FACT-General (FACT-G) plus 16 “Additional Concerns” items that assess concerns specific to patients receiving taxane therapy. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 16 “Additional Concerns” items produce the Taxane Subscale (TaxS) score (range 0 - 64). The FACT-Taxane Total Score (range 0 - 172) is the sum of the 4 FACT-G subscale scores plus the TaxS score. The FACT-Taxane Trial Outcome Index (TOI, range 0 - 120) is the sum of the TaxS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT-Taxane Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT-Taxane demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from 0.73 (SWB) to 0.82 (FWB) among the 4 general QOL subscales and 0.88 for the TaxS.<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-Taxane can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-Taxane can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-32" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li>Cella, D., Peterman, A., Hudgens, S., Webster, K., &amp; Socinski, M. A. (2003). Measuring the side effects of taxane therapy in oncology: the functional assesment of cancer therapy-taxane (FACT-taxane). Cancer, 98(4), 822-831. <a href="http://doi.org/10.1002/cncr.11578" class="uri">http://doi.org/10.1002/cncr.11578</a></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="symptom-specific-measures" class="section level1">
+<h1>Symptom Specific Measures</h1>
+<div id="functional-assessment-of-anorexiacachexia-therapy-faact" class="section level3">
+<h3>Functional Assessment of Anorexia/Cachexia Therapy (FAACT)</h3>
+<p><strong>The Functional Assessment of Anorexia/Cachexia Therapy (FAACT)</strong>, Version 4, is a 39-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with anorexia.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FAACT consists of two parts - the 27-item FACT-General (FACT-G) plus 12 “Additional Concerns” items that assess concerns specific to patients with anorexia. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 12 “Additional Concerns” items produce the Anorexia Cachexia Subscale (ACS) score (range 0 - 48). The FAACT Total Score (range 0 - 156) is the sum of the 4 FACT-G subscale scores plus the ACS score. The FAACT Trial Outcome Index (TOI, range 0 - 104) is the sum of the ACS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FAACT Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FAACT demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from 0.74 (SWB and EWB) to 0.77 (FWB) among the 4 general QOL subscales and 0.77 for the ACS.<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FAACT can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FAACT can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-33" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li>Ribaudo, J. M., Cella, D., Hahn, E. A., Lloyd, S. R., Tchekmedyian, N. S., Von Roenn, J., &amp; Leslie, W. T. (2000). Re-validation and shortening of the Functional Assessment of Anorexia/Cachexia Therapy (FAACT) questionnaire. Quality of Life Research: An International Journal of Quality of Life Aspects of Treatment, Care and Rehabilitation, 9(10), 1137-1146.</li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="facit-ad-abdominal-discomfort" class="section level3">
+<h3>FACIT-AD (Abdominal Discomfort)</h3>
+<p><strong>The Functional Assessment of Chronic Illness Therapy - Abdominal Discomfort (FACIT-AD)</strong>, Version 4, is a 30-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with abdominal discomfort.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACIT-AD consists of two parts - the 27-item FACT-General (FACT-G) plus 3 “Additional Concerns” items that assess concerns specific to patients with abdominal discomfort. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 3 “Additional Concerns” items produce the Abdominal Discomfort Subscale (ADS) score (range 0 - 12). The FACIT-AD Total Score (range 0 - 120) is the sum of the 4 FACT-G subscale scores plus the ADS score. The FACIT-AD Trial Outcome Index (TOI, range 0 - 68) is the sum of the ADS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACIT-AD Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACIT-AD demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from ? () to ? () among the 4 general QOL subscales and ? for the ADS<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACIT-AD can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACIT-AD can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-34" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="facit-ai-ascites-index" class="section level3">
+<h3>FACIT-AI (Ascites Index)</h3>
+<p><strong>The Functional Assessment of Chronic Illness Therapy - Ascites Index (FACIT-AI)</strong>, Version 4, is a 13-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with ascites.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The items produce the FACIT-AI score (range 0 - 80). Higher scores indicate better QoL. In the original validation study, the FACIT-AI demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from ? () to ? () among the 4 general QOL subscales and ? for the FACIT-AI<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACIT-AI can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACIT-AI can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-35" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="facit-cd-cervical-dysplasia" class="section level3">
+<h3>FACIT-CD (Cervical Dysplasia)</h3>
+<p><strong>The Functional Assessment of Chronic Illness Therapy - Cervical Dysplasia (FACIT-CD)</strong>,</p>
+<p>DIFFERENT</p>
+<div id="references-36" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li>Rao, D., Gela, N., Daley, E. M., Kattezham, R., Rodriguez, G., &amp; Cella, D. (2010). Developing a measure of health-related quality of life for women with cervical dysplasia resulting from human papillomavirus infection. International Journal of STD &amp; AIDS, 21(10), 697-701. <a href="http://doi.org/10.1258/ijsa.2010.010069" class="uri">http://doi.org/10.1258/ijsa.2010.010069</a></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="facit-d-diarrhea" class="section level3">
+<h3>FACIT-D (Diarrhea)</h3>
+<p><strong>The Functional Assessment of Chronic Illness Therapy - Diarrhea (FACIT-D)</strong>, Version 4, is a 38-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with diarrhea.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-Br consists of two parts - the 27-item FACT-General (FACT-G) plus 11 “Additional Concerns” items that assess concerns specific to patients with brain malignancies. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 11 “Additional Concerns” items produce the Diarrhea Subscale (DS) score (range 0 - 44). The FACIT-D Total Score (range 0 - 152) is the sum of the 4 FACT-G subscale scores plus the DS score. The FACIT-DS Trial Outcome Index (TOI, range 0 - 100) is the sum of the DS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACIT-D Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACIT-D demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from ? () to ? () among the 4 general QOL subscales and ? for the DS.<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACIT-D can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACIT-D can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-37" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="facit-f-fatigue" class="section level3">
+<h3>FACIT-F (Fatigue)</h3>
+<p><strong>The Functional Assessment of Chronic Illness Therapy - Fatigue (FACIT-F)</strong>, Version 4, is a 40-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with fatigue<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACIT-F consists of two parts - the 27-item FACT-General (FACT-G) plus 13 “Additional Concerns” items that assess concerns specific to patients with fatigue. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 13 “Additional Concerns” items produce the Fatigue Subscale (FS) score (range 0 - 52). The FACIT-F Total Score (range 0 - 160) is the sum of the 4 FACT-G subscale scores plus the FS score. The FACIT-FS Trial Outcome Index (TOI, range 0 - 108) is the sum of the FS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACIT-F Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACIT-F demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from ? () to ? () among the 4 general QOL subscales and ? for the FS.<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACIT-F can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACIT-F can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-38" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="facit-fatigue-fatigue" class="section level3">
+<h3>FACIT-Fatigue (Fatigue)</h3>
+<p><strong>The Functional Assessment of Chronic Illness Therapy - Fatigue (FACIT-Fatigue)</strong> ,Version 4, is a 13-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with fatigue<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The 13 items produce the Fatigue score (range 0 - 52). Higher scores indicate better QoL. In the original validation study, the FACIT-Fatigue demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from ? () to ? () among the 4 general QOL subscales and ? for the FS.<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACIT-Fatigue can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACIT-Fatigue can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-39" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-an-anemia" class="section level3">
+<h3>FACT-An (Anemia)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Anemia (FACT-An)</strong>, Version 4, is a 47-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with anemia/fatigue.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-An consists of two parts - the 27-item FACT-General (FACT-G) plus 20 “Additional Concerns” items that assess concerns specific to patients with anemia/fatigue. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 20 “Additional Concerns” items produce the Anemia Subscale (AnS) score (range 0 - 80). The FACT-An Total Score (range 0 - 188) is the sum of the 4 FACT-G subscale scores plus the AnS score. The FACT-An Trial Outcome Index (TOI, range 0 - 136) is the sum of the AnS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT-An Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT-An demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from ? () to ? () among the 4 general QOL subscales and ? for the AnS<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-An can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-An can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-40" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-b4-arm-morbidity" class="section level3">
+<h3>FACT-B+4 (Arm Morbidity)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Arm Morbidity (FACT-B+4)</strong>, Version 4, is a 47-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to breast cancer patients reguarding the impact of arm morbitity.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-B consists of two parts - the 27-item FACT-General (FACT-G) plus …….</p>
+<p>TWO SUBSCALES</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The ? “Additional Concerns” items produce the ……… In the original validation study, the FACT-B+4 demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from 0.71 (PWB) to 0.81 (FWB) among the 4 general QOL subscales, 0.62 for the BCS and 0.83 for the ARM<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-B+4 can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-B+4 can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-41" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li>Coster, S., Poole, K., &amp; Fallowfield, L. J. (2001). The validation of a quality of life scale to assess the impact of arm morbidity in breast cancer patients post-operatively. Breast Cancer Research and Treatment, 68(3), 273-282.</li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-bp-bone-pain" class="section level3">
+<h3>FACT-BP (Bone Pain)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Bone Pain (FACT-BP)</strong> ,Version 4, is a 15-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with bone pain<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The 15 items produce the Bone Pain score (range 0 - 60). Higher scores indicate better QoL. In the original validation study, the FACT-BP demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from ? () to ? () among the 4 general QOL subscales and ? for the BPS.<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-BP can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-BP can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-42" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-cog-cognitive" class="section level3">
+<h3>FACT-Cog (Cognitive)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Cognitive (FACT-Cog)</strong></p>
+<p>DIFFERENT SCALE</p>
+<div id="references-43" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-es-endocrine-symptoms" class="section level3">
+<h3>FACT-ES (Endocrine Symptoms)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Endocrine Symptoms (FACT-ES)</strong></p>
+<p>TWO VERSIONS - ONE with two specific subscales, the SECOND with three specific subscales</p>
+<div id="references-44" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-n-neutropenia" class="section level3">
+<h3>FACT-N (Neutropenia)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Neutropenia (FACT-N)</strong>, Version 4, is a 46-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with neutropenia.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-N consists of two parts - the 27-item FACT-General (FACT-G) plus 19 “Additional Concerns” items that assess concerns specific to patients with neutropenia. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 19 “Additional Concerns” items produce the Neutropenia Subscale (NS) score (range 0 - 76). The FACT-N Total Score (range 0 - 184) is the sum of the 4 FACT-G subscale scores plus the NS score. The FACT-N Trial Outcome Index (TOI, range 0 - 132) is the sum of the NS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT-N Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT-N demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from 0.70 (EWB) to 0.87 (FWB) among the 4 general QOL subscales and 0.84 for the NS.<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-N can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-N can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-45" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li>Wagner, L. I., Beaumont, J. L., Ding, B., Malin, J., Peterman, A., Calhoun, E., &amp; Cella, D. (2008). Measuring health-related quality of life and neutropenia-specific concerns among older adults undergoing chemotherapy: validation of the Functional Assessment of Cancer Therapy-Neutropenia (FACT-N). Supportive Care in Cancer: Official Journal of the Multinational Association of Supportive Care in Cancer, 16(1), 47-56. <a href="http://doi.org/10.1007/s00520-007-0270-7" class="uri">http://doi.org/10.1007/s00520-007-0270-7</a></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-th11-thrombocytopenia" class="section level3">
+<h3>FACT-Th11 (Thrombocytopenia)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Thrombocytopenia (FACT-Th11)</strong>, Version 4, is a 46-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with thrombocytopenia<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-Th11 consists of two parts - the 27-item FACT-General (FACT-G) plus 11 “Additional Concerns” items that assess concerns specific to patients with thrombocytopenia Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 11 “Additional Concerns” items produce the Thrombocytopenia Subscale (ThS) score (range 0 - 44). The FACT-Th Total Score (range 0 - 152) is the sum of the 4 FACT-G subscale scores plus the ThS score. The FACT-Th Trial Outcome Index (TOI, range 0 - 100) is the sum of the ThS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT-Th11 Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT-Th11 demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from 0.71 (SWB) to 0.90 (PWB) among the 4 general QOL subscales and 0.90 for the ThS<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-Th11 can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-Th11 can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-46" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fact-th18-thrombocytopenia" class="section level3">
+<h3>FACT-Th18 (Thrombocytopenia)</h3>
+<p><strong>The Functional Assessment of Cancer Therapy - Thrombocytopenia (FACT-Th18)</strong>, Version 4, is a 46-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with thrombocytopenia<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FACT-Th18 consists of two parts - the 27-item FACT-General (FACT-G) plus 18 “Additional Concerns” items that assess concerns specific to patients with thrombocytopenia Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 18 “Additional Concerns” items produce the Thrombocytopenia Subscale (ThS) score (range 0 - 44). The FACT-Th Total Score (range 0 - 180) is the sum of the 4 FACT-G subscale scores plus the ThS score. The FACT-Th Trial Outcome Index (TOI, range 0 - 128) is the sum of the ThS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FACT-Th18 Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FACT-Th18 demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from 0.71 (SWB) to 0.90 (PWB) among the 4 general QOL subscales and 0.90 for the ThS<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FACT-Th18 can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FACT-Th18 can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-47" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fait-f-fecal" class="section level3">
+<h3>FAIT-F (Fecal)</h3>
+<p><strong>The Functional Assessment of Incontinence Therapy - Fecal (FAIT-F)</strong>, Version 4, is a 39-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with fecal incontinence.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FAIT-F consists of two parts - the 27-item FACT-General (FACT-G) plus 12 “Additional Concerns” items that assess concerns specific to patients with fecal incontinence. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 12 “Additional Concerns” items produce the Fecal Incontinence Subscale (FIS) score (range 0 - 48). The FAIT-F Total Score (range 0 - 156) is the sum of the 4 FACT-G subscale scores plus the FIS score. The FAIT-F Trial Outcome Index (TOI, range 0 - 104) is the sum of the FIS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FAIT-F Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FAIT-F demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from ? () to ? () among the 4 general QOL subscales and ? for the FIS<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FAIT-F can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FAIT-F can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-48" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+<div id="fait-u-urinary" class="section level3">
+<h3>FAIT-U (Urinary)</h3>
+<p><strong>The Functional Assessment of Incontinence Therapy - Urinary (FAIT-U)</strong>, Version 4, is a 38-item questionnaire designed to assess general quality of life (QOL) as well as symptoms and concerns specific to the QOL of patients with urinary incontinence.<strong>[REF 1]</strong> The questionnaire asks respondents to indicate the extent to which each item applied to them over “the past 7 days” using a 5-point Likert-type response format ranging from “0 - Not at all” to “4 - Very much”. It takes approximately 10-15 minutes to complete.<strong>[REF 2]</strong></p>
+<p>The FAIT-U consists of two parts - the 27-item FACT-General (FACT-G) plus 11 “Additional Concerns” items that assess concerns specific to patients with urinary incontinence. Together, these two parts produce a total of 8 scores: 5 subscale scores, 2 total scores, and one Trial Outcome Index (TOI).</p>
+<p>The 27 FACT-G items produce the FACT-G Total Score and 4 subscale scores corresponding to 4 primary QOL domains: Physical Well-Being (PWB, 7 items, range 0 - 28), Social/Family Well-Being (SWB, 7 items, range 0 - 28), Emotional Well-Being (EWB, 6 items, range 0 - 24), and Functional Well-Being (FWB, 7 items, range 0 - 28). The FACT-G Total Score is computed as the sum of the 4 subscale scores and ranges from 0 to 108.<strong>[REF 3]</strong> The 11 “Additional Concerns” items produce the Urinary Incontinence Subscale (UIS) score (range 0 - 44). The FAIT-U Total Score (range 0 - 152) is the sum of the 4 FACT-G subscale scores plus the UIS score. The FAIT-U Trial Outcome Index (TOI, range 0 - 100) is the sum of the UIS score, the Physical Well-Being score, and the Functional Well-Being score. The TOI is a common endpoint in clinical trials because it can be more sensitive to changes in physical/functional status than the FAIT-U Total Score, which includes the more stable Social and Emotional Well-Being domains.<strong>[REF 2]</strong> For all 8 scores, higher scores indicate better QoL. In the original validation study, the FAIT-F demonstrated good internal consistency reliability, with Cronbach’s alphas ranging from ? () to ? () among the 4 general QOL subscales and ? for the UIS<strong>[REF 1]</strong></p>
+<p>More specific details on scoring the FAIT-U can be found at the official website, www.facit.org, where SAS and SPSS scoring algorithms are available for download. Additionally, the FAIT-U can be scored in R using the “FACTscorer” package.<strong>[REF 4]</strong></p>
+<div id="references-49" class="section level4">
+<h4>REFERENCES:</h4>
+<ol style="list-style-type: decimal">
+<li></li>
+<li>Webster, K., Cella, D. &amp; Yost, K. The Functional Assessment of Chronic Illness Therapy (FACIT) Measurement System: properties, applications, and interpretation. Health and Quality of Life Outcomes 1, 79 (2003).</li>
+<li>Cella DF, Tulsky DS, Gray G, et al. The Functional Assessment of Cancer Therapy scale: development and validation of the general measure. J Clin Oncol 1993;11:570-579.</li>
+<li>Baser, R. FACTscorer: Scores the FACT and FACIT Family of Patient-Reported Outcome Measures. R package version 0.2.0 (2016). <a href="https://cran.r-project.org/package=FACTscorer" class="uri">https://cran.r-project.org/package=FACTscorer</a></li>
+</ol>
+</div>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -28,3 +28,6 @@ Maintainer: Ray Baser <ray.stats@gmail.com>
 URL: http://github.com/raybaser/FACTscorer
 BugReports: http://github.com/raybaser/FACTscorer/issues
 RoxygenNote: 5.0.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr

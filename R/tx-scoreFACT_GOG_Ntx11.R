@@ -1,10 +1,10 @@
-#' @title Score the FACT/GOG-Ntx-11 
+#' @title Score the FACT/GOG-Ntx11 
 #' 
 #' @description
-#' Generates all of the scores of the FACT/GOG-Ntx-11 (version 4) from 
+#' Generates all of the scores of the FACT/GOG-Ntx11 (version 4) from 
 #' item responses.
 #' 
-#' @templateVar MEASURE FACT/GOG-Ntx-11 
+#' @templateVar MEASURE FACT/GOG-Ntx11 
 #' @templateVar SCOREFUN scoreFACTGOG_Ntx11
 #' @template templateDetailsAC
 #'
@@ -20,9 +20,9 @@
 #'   \item \strong{EWB} - Emotional Well-Being subscale
 #'   \item \strong{FWB} - Physical Well-Being subscale
 #'   \item \strong{FACTG} - FACT-G Total Score (PWB+SWB+EWB+FWB)
-#'   \item \strong{NtxS11} - FACT/GOG-Ntx-11 subscale
-#'   \item \strong{FACTGOG_Ntx11_TOTAL} - FACT/GOG-Ntx-11 Total Score (PWB+SWB+EWB+FWB+NtxS11)
-#'   \item \strong{FACTGOG_Ntx11_TOI} - FACT/GOG-Ntx-11 Trial Outcome Index (PWB+FWB+NtxS11)
+#'   \item \strong{NtxS11} - FACT/GOG-Ntx11 subscale
+#'   \item \strong{FACTGOG_Ntx11_TOTAL} - FACT/GOG-Ntx11 Total Score (PWB+SWB+EWB+FWB+NtxS11)
+#'   \item \strong{FACTGOG_Ntx11_TOI} - FACT/GOG-Ntx11 Trial Outcome Index (PWB+FWB+NtxS11)
 #' }
 #'
 #' If \code{AConly = TRUE}, the only scale score returned is \strong{NtxS11}.
@@ -32,7 +32,7 @@
 #' variables will be returned if \code{updateItems = TRUE} or \code{keepNvalid =
 #' TRUE}.
 #'
-#' @references FACT/GOG-Ntx-11 Scoring Guidelines, available at
+#' @references FACT/GOG-Ntx11 Scoring Guidelines, available at
 #'   \url{http://www.facit.org}
 #'
 #'

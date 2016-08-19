@@ -2,7 +2,7 @@
 % Please edit documentation in R/tx-scoreFACT_GOG_Ntx13.R
 \name{scoreFACTGOG_Ntx13}
 \alias{scoreFACTGOG_Ntx13}
-\title{Score the FACT/GOG-Ntx-13}
+\title{Score the FACT/GOG-Ntx13}
 \usage{
 scoreFACTGOG_Ntx13(df, id = NULL, AConly = FALSE, updateItems = FALSE,
   keepNvalid = FALSE)
@@ -46,8 +46,8 @@ A data frame with the following scale scores is returned:
   \item \strong{FWB} - Physical Well-Being subscale
   \item \strong{FACTG} - FACT-G Total Score (PWB+SWB+EWB+FWB)
   \item \strong{NtxS13} - GOG_Ntx13 subscale
-  \item \strong{FACTGOG_Ntx13_TOTAL} - FACT/GOG-Ntx-13 Total Score (PWB+SWB+EWB+FWB+NtxS13)
-  \item \strong{FACTGOG_Ntx13_TOI} - FACT/GOG-Ntx-13 Trial Outcome Index (PWB+FWB+NtxS13)
+  \item \strong{FACTGOG_Ntx13_TOTAL} - FACT/GOG-Ntx13 Total Score (PWB+SWB+EWB+FWB+NtxS13)
+  \item \strong{FACTGOG_Ntx13_TOI} - FACT/GOG-Ntx13 Trial Outcome Index (PWB+FWB+NtxS13)
 }
 
 If \code{AConly = TRUE}, the only scale score returned is \strong{NtxS13}.
@@ -58,13 +58,13 @@ variables will be returned if \code{updateItems = TRUE} or \code{keepNvalid =
 TRUE}.
 }
 \description{
-Generates all of the scores of the FACT/GOG-Ntx-13 (Version 4) from 
+Generates all of the scores of the FACT/GOG-Ntx13 (Version 4) from 
 item responses.
 }
 \details{
-Given a data frame that includes all of the FACT/GOG-Ntx-13 (Version
+Given a data frame that includes all of the FACT/GOG-Ntx13 (Version
   4) items as variables, appropriately named, this function generates all of
-  the FACT/GOG-Ntx-13 scale scores.  It is crucial that the item variables in
+  the FACT/GOG-Ntx13 scale scores.  It is crucial that the item variables in
   the supplied data frame are named according to FACT conventions.  For
   example, the first physical well-being item should be named GP1, the second
   GP2, and so on. Please refer to the materials provided by
@@ -86,10 +86,11 @@ Given a data frame that includes all of the FACT/GOG-Ntx-13 (Version
   see the documentation entry for \code{\link{scoreFACTG}} and
   \code{\link{FACTscorer}}.
 }
-\section{Note}{
+\section{If you get an error message}{
 
-  Keep in mind that this function (and R in general) is
-  case-sensitive.
+  Keep in mind that this function (and R in general) is case-sensitive.
+  Items should be named according to FACT conventions (see \code{Details}
+  above).
 
   All items in \code{df} should be \code{numeric} (i.e., of type
   \code{integer} or \code{double}).
@@ -134,7 +135,7 @@ summary(scoredDat[, c('PWB', 'SWB', 'EWB', 'FWB', 'FACTG',
 }
 }
 \references{
-FACT/GOG-Ntx-13 Scoring Guidelines, available at
+FACT/GOG-Ntx13 Scoring Guidelines, available at
   \url{http://www.facit.org}
 }
 \seealso{

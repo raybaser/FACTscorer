@@ -2,7 +2,7 @@
 % Please edit documentation in R/tx-scoreFACT_AntiA.R
 \name{scoreFACT_AntiA}
 \alias{scoreFACT_AntiA}
-\title{Score the FACT-AntiA}
+\title{Score the FACT-AntiA (Anti-Angiogenesis)}
 \usage{
 scoreFACT_AntiA(df, id = NULL, AConly = FALSE, updateItems = FALSE,
   keepNvalid = FALSE)
@@ -45,21 +45,17 @@ A data frame with the following scale scores is returned:
   \item \strong{EWB} - Emotional Well-Being subscale
   \item \strong{FWB} - Physical Well-Being subscale
   \item \strong{FACTG} - FACT-G Total Score (PWB+SWB+EWB+FWB)
-  \item \strong{AntiAS} - AntiA subscale
-  \item \strong{FACT_AntiA_TOTAL} - FACT-AntiA Total Score (PWB+SWB+EWB+FWB+AntiAS)
-  \item \strong{FACT_AntiA_TOI} - FACT-AntiA Trial Outcome Index (PWB+FWB+AntiAS)
+  \item \strong{AntiAS23} - AntiA subscale, 23-item version
+  \item \strong{AntiAS24} - AntiA subscale, 24-item version
+  \item \strong{FACT_AntiA_TOTAL} - FACT-AntiA Total Score
+  (PWB+SWB+EWB+FWB+AntiAS23)
+  \item \strong{FACT_AntiA_TOI} - FACT-AntiA Trial Outcome Index
+  (PWB+FWB+AntiAS23)
 }
-
-If \code{AConly = TRUE}, the only scale score returned is \strong{AntiAS}.
-
-If a variable was given to the \code{id} argument, then that variable will
-also be in the returned data frame. Additional, relatively unimportant,
-variables will be returned if \code{updateItems = TRUE} or \code{keepNvalid =
-TRUE}.
 }
 \description{
-Generates all of the scores of the Functional Assessment of Cancer Therapy - 
-AntiA (FACT-AntiA, v4) from item responses.
+Generates all of the scores of the Functional Assessment of Cancer Therapy -
+Anti-Angiogenesis (FACT-AntiA, v4) from item responses.
 }
 \details{
 Given a data frame that includes all of the FACT-AntiA (Version
@@ -86,10 +82,11 @@ Given a data frame that includes all of the FACT-AntiA (Version
   see the documentation entry for \code{\link{scoreFACTG}} and
   \code{\link{FACTscorer}}.
 }
-\section{Note}{
+\section{If you get an error message}{
 
-  Keep in mind that this function (and R in general) is
-  case-sensitive.
+  Keep in mind that this function (and R in general) is case-sensitive.
+  Items should be named according to FACT conventions (see \code{Details}
+  above).
 
   All items in \code{df} should be \code{numeric} (i.e., of type
   \code{integer} or \code{double}).
@@ -99,11 +96,37 @@ Given a data frame that includes all of the FACT-AntiA (Version
   \code{1}, \code{2}, \code{3}, or \code{4}.  Any other value for any of the
   items will result in an error message and no scores.
 }
+
+\section{NOTE - Difference Between the 2 Versions of the AntiA Subscale}{
+
+
+The scoring instructions for the FACT-AntiA on \url{www.FACIT.org} were
+updated in February 2016 to include 2 versions of the AntiA Subscale.
+\code{AntiAS23} is scored from 23 items and \code{AntiAS24} is scored from 24
+items.  The additional item in \code{AntiAS24} is GP2, from the PWB subscale
+of the FACT-G.  \code{AntiAS23} is used for the calculation of the FACT-AntiA
+Total Score and TOI to avoid counting the GP2 item more than once in those
+scores.  An earlier version of the manuscript in the References below
+(downloaded from \url{www.FACIT.org}) states: "Because one item ("I have
+nausea") from the AntiA subscale is also on the FACT-G, the AntiA subscale
+consists of 23 rather than 24 items when combined with the FACT-G."  This
+statement appears to be omitted from the official published version of the
+manuscript.  This function will provide both versions of the subscale;
+however, I assume that most users will want to use \code{AntiAS23} because if
+item GP2 was administered it is likely that all of the FACT-G items were
+administered.  As of this version of the \code{\link{FACTscorer}} package,
+there does not appear to be a version of the questionnaire on
+\url{www.FACIT.org} that contains only the 24 items needed for the 24-item
+version.  In the validation study in the References, an additional 5
+subscales are scored from the 24 items on \code{AntiAS24}.  Currently,
+\code{scoreFACT_AntiA} does not produce these subscale scores.
+}
 \examples{
 \dontshow{
+
 ## FIRST creating a df with fake item data to score
-itemNames <- c('HI7', 'HI12', 'AA1', 'AA2', 'AA3', 'AA4', 'AA5', 
-'AA6', 'AA7', 'C5', 'AA8', 'BMT13', 'BRM5', 'MS3', 'BRM1', 'Cx6', 
+itemNames <- c('HI7', 'HI12', 'AA1', 'AA2', 'AA3', 'AA4', 'AA5',
+'AA6', 'AA7', 'C5', 'AA8', 'BMT13', 'BRM5', 'MS3', 'BRM1', 'Cx6',
 'AA9', 'TH5', 'B5', 'AA10', 'GA1', 'B1', 'O2')
 exampleDat <- make_FACTdata(namesAC = itemNames)
 
@@ -131,12 +154,17 @@ scoredDat <- scoreFACT_AntiA(exampleDat, updateItems = TRUE, keepNvalid = TRUE)
 names(scoredDat)
 ## Descriptives of scored scales
 summary(scoredDat[, c('PWB', 'SWB', 'EWB', 'FWB', 'FACTG',
-                      'AntiAS', 'FACT_AntiA_TOTAL', 'FACT_AntiA_TOI')])
+                      'AntiAS23', 'FACT_AntiA_TOTAL', 'FACT_AntiA_TOI')])
 }
 }
 \references{
 FACT-AntiA Scoring Guidelines, available at
   \url{http://www.facit.org}
+
+Kaiser, K, Beaumont, JL, Webster, K, Yount, SE, Wagner, LI, Kuzel, TM, &
+Cella, D. (2015). Development and validation of the functional assessment of
+cancer therapy-antiangiogenesis subscale. \emph{Cancer Medicine}, 4(5),
+690-698. \url{http://doi.org/10.1002/cam4.385}
 }
 \seealso{
 This function is very similar to the \code{\link{scoreFACT_B}}
