@@ -31,15 +31,15 @@ These optional variables have names of the format \code{SCALENAME_N}.
 The following scale scores are returned:
 
 \describe{
-  \item{PWB}{Physical Well-Being subscale}
-  \item{SWB}{Social/Family Well-Being subscale}
-  \item{EWB}{Emotional Well-Being subscale}
-  \item{FWB}{Physical Well-Being subscale}
-  \item{FACTG}{FACT-G Total Score (i.e., PWB+SWB+EWB+FWB)}
-  \item{BCS}{Breast Cancer subscale}
- \item{ARM}{Arm subscale}
-  \item{FACT_B_TOTAL}{FACT-B Total Score (i.e., PWB+SWB+EWB+FWB+BCS)}
-  \item{FACT_B_TOI}{FACT-B Trial Outcome Index (e.g., PWB+FWB+BCS)}
+\item{PWB}{Physical Well-Being subscale}
+\item{SWB}{Social/Family Well-Being subscale}
+\item{EWB}{Emotional Well-Being subscale}
+\item{FWB}{Physical Well-Being subscale}
+\item{FACTG}{FACT-G Total Score (i.e., PWB+SWB+EWB+FWB)}
+\item{BCS}{Breast Cancer subscale}
+\item{ARM}{Arm subscale}
+\item{FACT_B_TOTAL}{FACT-B Total Score (i.e., PWB+SWB+EWB+FWB+BCS)}
+\item{FACT_B_TOI}{FACT-B Trial Outcome Index (e.g., PWB+FWB+BCS)}
 }
 }
 \description{
@@ -47,11 +47,11 @@ Generates all of the scores of the Functional Assessment of Cancer Therapy - Bre
 (FACT-B+4, v4) for patients with Lymphedema (to be used with FACT-B) from item responses.
 }
 \details{
-Given a data frame that includes all of the FACT-B+4 (Version 4) items as 
-variables, appropriately named, this function generates all of the FACT-B+4 
-scale scores.  It is crucial that the item variables in the supplied data 
-frame are named according to FACT conventions.  For example, the first 
-physical well-being item should be named GP1, the second GP2, and so on.  
+Given a data frame that includes all of the FACT-B+4 (Version 4) items as
+variables, appropriately named, this function generates all of the FACT-B+4
+scale scores.  It is crucial that the item variables in the supplied data
+frame are named according to FACT conventions.  For example, the first
+physical well-being item should be named GP1, the second GP2, and so on.
 Please refer to the materials provided by \url{http://www.facit.org} for the
 particular questionnaire you are using.  In particular, refer to the left
 margin of the official questionnaire (i.e., from facit.org) for the
@@ -81,11 +81,12 @@ provided.  If set to \code{TRUE}, any item that is supposed to be
 reverse coded will be replaced with its reversed version in the data
 frame returned by \code{scoreFACT_Bplus4}.
 }
+
 \examples{
 ## Setting up item names for fake data
-G_names <- c(paste0('GP', 1:7), 
-             paste0('GS', 1:7), 
-             paste0('GE', 1:6), 
+G_names <- c(paste0('GP', 1:7),
+             paste0('GS', 1:7),
+             paste0('GE', 1:6),
              paste0('GF', 1:7))
 AC_names1 <- c('B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9')
 AC_names2 <- c('B3', 'B10', 'B11', 'B12', 'B13')
@@ -94,16 +95,16 @@ itemNames <- c(G_names, AC_names)
 ## Generating random item responses for 8 fake respondents
 set.seed(6375309)
 exampleDat <- t(replicate(8, sample(0:4, size = length(itemNames), replace = TRUE)))
-## Making half of respondents missing about 10\% of items, 
+## Making half of respondents missing about 10\% of items,
 ## half missing about 50\%.
-miss10 <- t(replicate(4, sample(c(0, 9), prob = c(0.9, 0.1), 
+miss10 <- t(replicate(4, sample(c(0, 9), prob = c(0.9, 0.1),
     size = length(itemNames), replace = TRUE)))
-miss50 <- t(replicate(4, sample(c(0, 9), prob = c(0.5, 0.5), 
+miss50 <- t(replicate(4, sample(c(0, 9), prob = c(0.5, 0.5),
     size = length(itemNames), replace = TRUE)))
 missMtx <- rbind(miss10, miss50)
 ## Using 9 as the code for missing responses
 exampleDat[missMtx == 9] <- 9
-exampleDat <- as.data.frame(cbind(ID = paste0('ID', 1:8), 
+exampleDat <- as.data.frame(cbind(ID = paste0('ID', 1:8),
     as.data.frame(exampleDat)))
 names(exampleDat) <- c('ID', itemNames)
 
@@ -117,10 +118,9 @@ scoredDat
 scoredDat <- scoreFACT_Bplus4(exampleDat, updateItems = TRUE, keepNvalid = TRUE)
 names(scoredDat)
 ## Descriptives of scored scales
-summary(scoredDat[, c('PWB', 'SWB', 'EWB', 'FWB', 'FACTG', 
+summary(scoredDat[, c('PWB', 'SWB', 'EWB', 'FWB', 'FACTG',
                       'BCS', 'ARM', 'FACT_B_TOTAL', 'FACT_B_TOI')])
 }
 \references{
 FACT-B+4 Scoring Guidelines, available at \url{http://www.facit.org}
 }
-

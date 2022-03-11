@@ -1,0 +1,15 @@
+citHeader("To cite FACTscorer in publications use:")
+
+citEntry(
+  entry    = "Misc",
+  title    = "FACTscorer: Score the FACT and FACIT Family of Patient-Reported Outcome Measures",
+  author   = person("Ray", "Baser"),
+  year     = "2022",
+  note     = "R package version 0.2.0",
+  url      = "https://CRAN.R-project.org/package=FACTscorer",
+  textVersion = paste(
+  "Baser, Ray (2022). FACTscorer: Score the FACT and FACIT Family of
+  Patient-Reported Outcome Measures. R package version 0.2.0.
+  https://CRAN.R-project.org/package=FACTscorer"
+  )
+)

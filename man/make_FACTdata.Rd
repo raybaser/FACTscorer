@@ -4,8 +4,14 @@
 \alias{make_FACTdata}
 \title{Make fake FACT-like data to illustrate scoring functions}
 \usage{
-make_FACTdata(namesAC = NULL, N = 8, AConly = FALSE, pmiss1 = 0.1,
-  pmiss2 = 0.5)
+make_FACTdata(
+  namesAC = NULL,
+  N = 8,
+  AConly = FALSE,
+  pmiss1 = 0.1,
+  pmiss2 = 0.5,
+  misscode = NA
+)
 }
 \arguments{
 \item{namesAC}{Character vector of the "Additional Concerns" item names.}
@@ -25,8 +31,8 @@ of respondents.}
 }
 \value{
 A data frame with \code{N} fake respondents (8 by default).  The first half
-of respondents will have missing values (coded as \code{9}) for roughly 10\%
-of the items, and the last half will have missing values for roughly 50\% of
+of respondents will have missing values (coded as \code{9}) for roughly 10\\%
+of the items, and the last half will have missing values for roughly 50\\% of
 the items.
 }
 \description{
@@ -53,4 +59,3 @@ itemNames <- c('B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'P2')
 (exampleDat <- make_FACTdata(namesAC = itemNames))
 (exampleDat <- make_FACTdata(namesAC = itemNames, AConly = TRUE))
 }
-

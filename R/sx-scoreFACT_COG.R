@@ -126,7 +126,6 @@ scoreFACT_COG <- function(df, updateItems = FALSE, keepNvalid = FALSE) {
     AC_items <- dfup[, AC_names]
     if (any(!(as.matrix(AC_items) %in% c(0:4, 8, 9, NA)))) {
         stop("At least 1 response is out of range (i.e., not 0-4, 8, 9, or NA)")
-        break
     }
     makeMiss <- function(x) {
         x[x %in% c(8, 9)] <- NA

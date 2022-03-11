@@ -4,8 +4,13 @@
 \alias{scoreFACT_M}
 \title{Score the FACT-M}
 \usage{
-scoreFACT_M(df, id = NULL, AConly = FALSE, updateItems = FALSE,
-  keepNvalid = FALSE)
+scoreFACT_M(
+  df,
+  id = NULL,
+  AConly = FALSE,
+  updateItems = FALSE,
+  keepNvalid = FALSE
+)
 }
 \arguments{
 \item{df}{A data frame with the questionnaire items, appropriately-named.}
@@ -40,15 +45,15 @@ or, equivalently, set it to \code{FALSE}.}
 A data frame with the following scale scores is returned:
 
 \itemize{
-  \item \strong{PWB} - Physical Well-Being subscale
-  \item \strong{SWB} - Social/Family Well-Being subscale
-  \item \strong{EWB} - Emotional Well-Being subscale
-  \item \strong{FWB} - Physical Well-Being subscale
-  \item \strong{FACTG} - FACT-G Total Score (PWB+SWB+EWB+FWB)
-  \item \strong{MS} - Melanoma subscale
-  \item \strong{MSS} - Melanoma Surgery subscale
-  \item \strong{FACT_M_TOTAL} - FACT-M Total Score (PWB+SWB+EWB+FWB+MS)
-  \item \strong{FACT_M_TOI} - FACT-M Trial Outcome Index (PWB+FWB+MS)
+\item \strong{PWB} - Physical Well-Being subscale
+\item \strong{SWB} - Social/Family Well-Being subscale
+\item \strong{EWB} - Emotional Well-Being subscale
+\item \strong{FWB} - Physical Well-Being subscale
+\item \strong{FACTG} - FACT-G Total Score (PWB+SWB+EWB+FWB)
+\item \strong{MS} - Melanoma subscale
+\item \strong{MSS} - Melanoma Surgery subscale
+\item \strong{FACT_M_TOTAL} - FACT-M Total Score (PWB+SWB+EWB+FWB+MS)
+\item \strong{FACT_M_TOI} - FACT-M Trial Outcome Index (PWB+FWB+MS)
 }
 
 If \code{AConly = TRUE}, the only scale scores returned are \strong{MS} and
@@ -99,6 +104,7 @@ This scoring function expects missing item responses to be coded as NA,
 other value for any of the items will result in an error message and no
 scores.
 }
+
 \examples{
 \dontrun{
 ## To see examples using this function, run:  example(scoreFACT_M)
@@ -162,7 +168,7 @@ rm(miss10, miss50, missMtx, exampleDat, scoredDat, mergeDat)
 }
 \references{
 FACT-M Scoring Guidelines, available at
-  \url{http://www.facit.org}
+\url{http://www.facit.org}
 
 Cormier, J., Davidson, L., Xing, Y., Webster, K., & Cella, D. (2005).
 Measuring quality of life in patients with melanoma: Development of the
@@ -171,8 +177,7 @@ FACT-Melanoma Subscale.  \emph{The Journal of Supportive Oncology}, 3(5),
 }
 \seealso{
 This function is very similar to the \code{\link{scoreFACT_B}}
-  function.  To see examples of function usage, please see the documentation
-  for \code{\link{scoreFACT_B}}.  For additional details on the function
-  arguments, see \code{\link{scoreFACTG}} and \code{\link{FACTscorer}}.
+function.  To see examples of function usage, please see the documentation
+for \code{\link{scoreFACT_B}}.  For additional details on the function
+arguments, see \code{\link{scoreFACTG}} and \code{\link{FACTscorer}}.
 }
-

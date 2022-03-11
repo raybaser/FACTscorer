@@ -1,10 +1,10 @@
-#' @title Score the FACT-C 
-#' 
+#' @title Score the FACT-C
+#'
 #' @description
-#' Generates all of the scores of the Functional Assessment of Cancer Therapy - 
+#' Generates all of the scores of the Functional Assessment of Cancer Therapy -
 #' Colorectal Cancer (FACT-C, v4) from item responses.
-#' 
-#' 
+#'
+#'
 #' @templateVar MEASURE FACT-C
 #' @templateVar SCOREFUN scoreFACT_C
 #' @template templateDetailsAC
@@ -34,7 +34,7 @@
 #'
 #' @references FACT-C Scoring Guidelines, available at
 #'   \url{http://www.facit.org}
-#'   
+#'
 #' Ward, W.L., Hahn, E.A., Mo, F., Hernandez, L., Tulsky, D.S., & Cella, D.
 #' (1999). Reliability and validity of the Functional Assessment of Cancer
 #' Therapy-Colorectal (FACT-C) quality of life instrument. \emph{Quality of Life
@@ -42,7 +42,7 @@
 #'
 #'
 #' @export
-#' 
+#'
 #' @examples
 #'\dontshow{
 #' ## FIRST creating a df with fake item data to score
@@ -82,7 +82,7 @@ scoreFACT_C <- function(df, id = NULL, AConly = FALSE, updateItems = FALSE,
       df = df,
       id = id,
       namesAC = c("C1", "C2", "C3", "C4", "C5", "C6", "C7"),
-      namesRev = cc("C1", "C2", "C5"),
+      namesRev = c("C1", "C2", "C5"),
       nameSub = "CCS",
       nameTot = "FACT_C",
       AConly = AConly,

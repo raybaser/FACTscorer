@@ -150,7 +150,6 @@ scoreFACT_M <- function(df, id = NULL, AConly = FALSE, updateItems = FALSE,
       stop("Cannot find your id variable name in your df.
            Make sure it is typed correctly, and in quotes.
            Or just omit the id argument, since it is optional.")
-      break
     }
   }
 
@@ -171,7 +170,6 @@ scoreFACT_M <- function(df, id = NULL, AConly = FALSE, updateItems = FALSE,
   AC_items <- dfAC[, AC_names]
   if (any(!(as.matrix(AC_items) %in% c(0:4, 8, 9, NA)))) {
     stop("At least 1 response is out of range (i.e., not 0-4, 8, 9, or NA)")
-    break
   }
   makeMiss <- function(x) {
     x[x %in% c(8, 9)] <- NA

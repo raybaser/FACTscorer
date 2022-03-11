@@ -1,4 +1,10 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-# ignore roxygen templates:
-man-roxygen
+^admin$
+^README\.Rmd$
+^README-.*\.png$
+^cran-comments\.md$
+^codecov\.yml$
+^\.github$
+^CRAN-SUBMISSION$
+^LICENSE\.md$

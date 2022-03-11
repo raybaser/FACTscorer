@@ -106,21 +106,18 @@ scoreFACT_any <- function(df,
       stop("Cannot find your id variable name in your df.
            Make sure it is typed correctly, and in quotes.
            Or just omit the id argument, since it is optional.")
-      break
     }
   }
 
   ## Require namesAC to be non-null
   if (is.null(namesAC)) {
     stop("Please give item names to the 'namesAC' argument.")
-    break
   }
   ## Test whether namesAC or toupper(namesAC) is in df.
   if (!is.null(namesAC)) {
     if (!all(namesAC %in% names(df)) && !all(toupper(namesAC) %in% names(df))) {
       stop("At least 1 of the 'namesAC' variable names is not in your df.
            Make sure they are typed correctly, and each in quotes.")
-      break
     }
   }
 
@@ -146,7 +143,6 @@ scoreFACT_any <- function(df,
   AC_items <- df[namesAC]
   if (any(!(as.matrix(AC_items) %in% c(0:4, 8, 9, NA)))) {
     stop("At least 1 response is out of range (i.e., not 0-4, 8, 9, or NA)")
-    break
   }
   makeMiss <- function(x) {
     x[x %in% c(8, 9)] <- NA

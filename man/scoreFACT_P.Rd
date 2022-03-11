@@ -4,8 +4,13 @@
 \alias{scoreFACT_P}
 \title{Score the FACT-P}
 \usage{
-scoreFACT_P(df, id = NULL, AConly = FALSE, updateItems = FALSE,
-  keepNvalid = FALSE)
+scoreFACT_P(
+  df,
+  id = NULL,
+  AConly = FALSE,
+  updateItems = FALSE,
+  keepNvalid = FALSE
+)
 }
 \arguments{
 \item{df}{A data frame with the questionnaire items, appropriately-named.}
@@ -40,14 +45,14 @@ or, equivalently, set it to \code{FALSE}.}
 A data frame with the following scale scores is returned:
 
 \itemize{
-  \item \strong{PWB} - Physical Well-Being subscale
-  \item \strong{SWB} - Social/Family Well-Being subscale
-  \item \strong{EWB} - Emotional Well-Being subscale
-  \item \strong{FWB} - Physical Well-Being subscale
-  \item \strong{FACTG} - FACT-G Total Score (PWB+SWB+EWB+FWB)
-  \item \strong{PCS} - Prostate Cancer subscale
-  \item \strong{FACT_P_TOTAL} - FACT-P Total Score (PWB+SWB+EWB+FWB+PCS)
-  \item \strong{FACT_P_TOI} - FACT-P Trial Outcome Index (PWB+FWB+PCS)
+\item \strong{PWB} - Physical Well-Being subscale
+\item \strong{SWB} - Social/Family Well-Being subscale
+\item \strong{EWB} - Emotional Well-Being subscale
+\item \strong{FWB} - Physical Well-Being subscale
+\item \strong{FACTG} - FACT-G Total Score (PWB+SWB+EWB+FWB)
+\item \strong{PCS} - Prostate Cancer subscale
+\item \strong{FACT_P_TOTAL} - FACT-P Total Score (PWB+SWB+EWB+FWB+PCS)
+\item \strong{FACT_P_TOI} - FACT-P Trial Outcome Index (PWB+FWB+PCS)
 }
 
 If \code{AConly = TRUE}, the only scale score returned is \strong{PCS}.
@@ -63,42 +68,43 @@ Prostate Cancer (FACT-P, v4) from item responses.
 }
 \details{
 Given a data frame that includes all of the FACT-P (Version
-  4) items as variables, appropriately named, this function generates all of
-  the FACT-P scale scores.  It is crucial that the item variables in
-  the supplied data frame are named according to FACT conventions.  For
-  example, the first physical well-being item should be named GP1, the second
-  GP2, and so on. Please refer to the materials provided by
-  \url{http://www.facit.org} for the particular questionnaire you are using.
-  In particular, refer to the left margin of the official questionnaire
-  (i.e., from facit.org) for the appropriate item variable names.
+4) items as variables, appropriately named, this function generates all of
+the FACT-P scale scores.  It is crucial that the item variables in
+the supplied data frame are named according to FACT conventions.  For
+example, the first physical well-being item should be named GP1, the second
+GP2, and so on. Please refer to the materials provided by
+\url{http://www.facit.org} for the particular questionnaire you are using.
+In particular, refer to the left margin of the official questionnaire
+(i.e., from facit.org) for the appropriate item variable names.
 
-  This questionnaire consists of two components: (1) FACT-G items and (2)
-  "Additional Concerns" items.  The FACT-G items (G for General) measure
-  general aspects of QoL common to all cancer patients. The "Additional
-  Concerns" items measure issues relevant for a specific cancer type,
-  treatment, or symptom. These two questionnaire components are typically
-  administered together. In some studies, however, ONLY the "Additional
-  Concerns" items are administered. The \code{AConly} argument is provided to
-  accommodate such cases, and should be set to \code{AConly = TRUE} if ONLY
-  the "Additional Concerns" items were administered.
+This questionnaire consists of two components: (1) FACT-G items and (2)
+"Additional Concerns" items.  The FACT-G items (G for General) measure
+general aspects of QoL common to all cancer patients. The "Additional
+Concerns" items measure issues relevant for a specific cancer type,
+treatment, or symptom. These two questionnaire components are typically
+administered together. In some studies, however, ONLY the "Additional
+Concerns" items are administered. The \code{AConly} argument is provided to
+accommodate such cases, and should be set to \code{AConly = TRUE} if ONLY
+the "Additional Concerns" items were administered.
 
-  For more details on the \code{updateItems} and \code{keepNvalid} arguments,
-  see the documentation entry for \code{\link{scoreFACTG}} and
-  \code{\link{FACTscorer}}.
+For more details on the \code{updateItems} and \code{keepNvalid} arguments,
+see the documentation entry for \code{\link{scoreFACTG}} and
+\code{\link{FACTscorer}}.
 }
 \section{Note}{
 
-  Keep in mind that this function (and R in general) is
-  case-sensitive.
+Keep in mind that this function (and R in general) is
+case-sensitive.
 
-  All items in \code{df} should be \code{numeric} (i.e., of type
-  \code{integer} or \code{double}).
+All items in \code{df} should be \code{numeric} (i.e., of type
+\code{integer} or \code{double}).
 
-  This function expects missing item responses to be coded as \code{NA},
-  \code{8}, or \code{9}, and valid item responses to be coded as \code{0},
-  \code{1}, \code{2}, \code{3}, or \code{4}.  Any other value for any of the
-  items will result in an error message and no scores.
+This function expects missing item responses to be coded as \code{NA},
+\code{8}, or \code{9}, and valid item responses to be coded as \code{0},
+\code{1}, \code{2}, \code{3}, or \code{4}.  Any other value for any of the
+items will result in an error message and no scores.
 }
+
 \examples{
 \dontshow{
 ## FIRST creating a df with fake item data to score
@@ -135,7 +141,7 @@ summary(scoredDat[, c('PWB', 'SWB', 'EWB', 'FWB', 'FACTG',
 }
 \references{
 FACT-P Scoring Guidelines, available at
-  \url{http://www.facit.org}
+\url{http://www.facit.org}
 
 Esper, P., Mo, F., Chodak, G., Sinner, M., Cella, D., & Pienta, K.J. (1997).
 Measuring quality of life in men with prostate cancer using the Functional
@@ -144,10 +150,9 @@ Assessment of Cancer Therapy-Prostate (FACT-P) instrument. \emph{Urology}, 50(6)
 }
 \seealso{
 This function is very similar to the \code{\link{scoreFACT_B}}
-  function.  See the documentation for \code{\link{scoreFACT_B}} for more
-  details on the arguments and for examples.  Also see the documentation
-  entry for the \code{\link{FACTscorer}} package.  For brevity, examples are
-  omitted below, but can be accessed by running
-  \code{example(scoreFACT_P)}.
+function.  See the documentation for \code{\link{scoreFACT_B}} for more
+details on the arguments and for examples.  Also see the documentation
+entry for the \code{\link{FACTscorer}} package.  For brevity, examples are
+omitted below, but can be accessed by running
+\code{example(scoreFACT_P)}.
 }
-

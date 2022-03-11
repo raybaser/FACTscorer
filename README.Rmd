@@ -1,0 +1,177 @@
+---
+title: "FACTscorer R Package"
+output: 
+  github_document:
+    toc: true
+    toc_depth: 4
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+## FACTscorer Summary
+
+<!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version/FACTscorer)](https://CRAN.R-project.org/package=FACTscorer)
+<!-- badges: end -->
+
+`FACTscorer` contains functions to score most of the patient-reported outcome
+(PRO) measures from the Functional Assessment of Cancer Therapy (FACT) and
+Functional Assessment of Chronic Illness Therapy (FACIT) family of PRO measures.
+The questionnaires themselves can be downloaded from the [FACIT website](https://www.facit.org/).  For most of
+the FACT/FACIT questionnaires, the [FACIT website](https://www.facit.org/) provides scoring syntax for use with
+commercial statistical software (SAS and SPSS).  The `FACTscorer` R package is
+intended to serve as a free, reliable alternative for those without access to
+SAS or SPSS.  Additionally, it enables R users to both score and analyze the
+FACT and FACIT scales in R, avoiding the time-consuming and error-prone process
+of transferring data back-and-forth between statistical software. Finally, use
+of the `FACTscorer` package will prevent many sources of scoring error common when
+using SAS and/or SPSS syntax (e.g., copy-paste errors and other accidental
+modifications to the syntax).
+
+## Installation
+
+You can install the development version of `FACTscorer` from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("raybaser/FACTscorer")
+```
+
+## Expected Input Data Format
+
++ **All `FACTscorer` functions expect the FACT/FACIT items to be named according
+to FACT/FACIT conventions.**  For example, for the FACT-G, the first physical
+well-being item should be named GP1, the second GP2, and so on.  Please refer to
+the materials provided on the [FACIT website](https://www.facit.org/) for the
+particular questionnaire you are using.  In particular, refer to the left margin
+of the official questionnaire (i.e., from the [FACIT website](https://www.facit.org/)) 
+for the appropriate item variable names.  
+
++ All items on the questionnaire you are trying to score must be included as variables (**appropriately named**, see above) in your data frame.  
+
++ All item variables must be numeric or integer class (not character or factor) and be whole numbers ranging from 0 to 4.  
+
+  + For consistency with the SAS and SPSS scoring syntax on the [FACIT website](https://www.facit.org/), item values of `8` and `9` are allowed but will be recoded as system missing (i.e., `NA`) before scoring.
+
+
+
+## Examples  
+
+### Scoring the FACT-G
+
+This example shows how to score the FACT-G (Functional Assessment of Cancer Therapy - General) using the `scoreFACTG` function.
+
+Given a data frame that includes all 27 of the FACT-G items as variables,
+**appropriately named and formatted**, this function generates all of the FACT-G scale
+scores.  
+
+
+```{r FACT_G}
+library(FACTscorer)
+
+# Use `make_FACTdata()` function to create a small data frame with fake FACT-G
+# item data to score.  
+##  - Each respondent will have roughly 10% of the items missing to illustrate the
+##    scoring function properly prorates the scores for missing items.  
+##  - See ?make_FACTdata for more info on the arguments, if desired.
+
+df_factg <- make_FACTdata(N = 8, pmiss1 = .10, pmiss2 = .10)
+
+# Score the FACT-G items using the `scoreFACTG` function
+# All FACT-G scale scores will be output to a new data frame named `df_factg_scores`
+df_factg_scores <- scoreFACTG(df_factg)
+df_factg_scores
+
+# There are several ways you can merge the scores back into your original data
+# frame.  For example:
+df_factg <- cbind(df_factg, df_factg_scores)
+df_factg
+
+```
+
+
+### Scoring the FACT-B (Breast Cancer)
+
+
+This example shows how to score one of the cancer-specific measures in the FACT family, the FACT-B (Functional Assessment of Cancer Therapy - Breast).  The FACT-B can be scored using the `scoreFACT_B` function.
+
+Given a data frame that includes all of the FACT-B items as variables,
+**appropriately named and formatted**, the `scoreFACT_B` function generates all of the FACT-B scale scores.  
+
+**NOTE**:  The FACT-B contains all of the FACT-G (General) items, plus 10 items that assess "Additional Concerns" specific to breast cancer patients.  Those 10 items are used to calculate the Breast Cancer Subscale (BCS).  
+
+
+
+```{r FACT_B}
+library(FACTscorer)
+
+# Use `make_FACTdata()` function to create a small data frame with fake FACT-B
+# item data to score.  
+## - The `namesAC` argument takes a character vector containing the names of  
+##   the 10 "Additional Concerns" (AC) items. 
+df_factb <- make_FACTdata(N = 8, pmiss1 = 0.10, pmiss2 = 0.10,
+  namesAC = c('B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'P2'))
+
+# Score the FACT-B items using the `scoreFACT_B` function
+# All FACT-B scale scores will be output to a new data frame named `df_factb_scores`
+df_factb_scores <- scoreFACT_B(df_factb)
+df_factb_scores
+
+# There are several ways you can merge the scores back into your original data
+# frame.  For example:
+df_factb <- cbind(df_factb, df_factb_scores)
+
+```
+
+
+
+### Scoring only "Additional Concerns" items from the FACT-B
+
++  The **full** FACT-B contains all 27 of the FACT-G (General) items, plus 10
+items that assess "Additional Concerns" specific to breast cancer patients. 
+Those 10 "Additional Concerns" (AC) items are used to calculate the Breast
+Cancer Subscale (BCS).  
+
++  Although not generally recommended by the FACIT organization, sometimes researchers might omit the FACT-G items and include only the breast cancer-specific "Additional Concerns" items in their study.   
+
++  Functions in the `FACTscorer` package can be told to score only the "Additional Concerns" items using the argument, `AConly = TRUE`.  In the case of the FACT-B, using the  `scoreFACT-B` fucntion with `AConly = TRUE` will score only the Breast Cancer Subscale (BCS).   
+
++  Although the example below uses the FACT-B as an example, this applies to all of the FACT/FACIT questionnaires that include the general FACT-G items plus more specific "Additional Concerns" items.   
+
+
+
+```{r FACT_B_AConly}
+library(FACTscorer)
+
+# Use `make_FACTdata()` function to create a small data frame with fake FACT-B
+# item data to score.  
+##  - The `namesAC` argument takes a character vector containing the names of  
+##    the 10 "Additional Concerns" (AC) items.  
+##  - Setting `AConly = TRUE` will generate data for the AC items and omit the FACT-G
+##    items.  
+df_bcs <- make_FACTdata(N = 8, pmiss1 = 0.10, pmiss2 = 0.10, AConly = TRUE,
+  namesAC = c('B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'P2'))
+
+# Use the `scoreFACT_B` function with `AConly = TRUE` to score only the "Additional Concerns" items.  
+# The data frame `df_bcs_scores` will contain only the Breast Cancer Subscale (BCS) scores.
+df_bcs_scores <- scoreFACT_B(df_bcs, AConly = TRUE)
+df_bcs_scores
+
+# There are several ways you can merge the scores back into your original data
+# frame.  For example:
+df_bcs <- cbind(df_bcs, df_bcs_scores)
+
+
+```
+
+
+

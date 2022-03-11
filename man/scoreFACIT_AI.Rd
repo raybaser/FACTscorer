@@ -33,7 +33,7 @@ or, equivalently, set it to \code{FALSE}.}
 A data frame containing the following scale score is returned:
 
 \itemize{
-  \item \strong{FACIT_AI} - FACIT Ascites Index
+\item \strong{FACIT_AI} - FACIT Ascites Index
 }
 
 If a variable was given to the \code{id} argument, then that variable will
@@ -47,32 +47,33 @@ Scores the Functional Assessment of Chronic Illness Therapy-Ascites Index
 }
 \details{
 Given a data frame that includes all of the FACIT-AI  items as
-  variables, appropriately named, this function generates the FACIT-AI
-  scale score.  It is crucial that the item variables in the supplied data
-  frame are named according to FACT conventions.  For example, the first item
-  should be named GP1, the second GP2, and so on.  Please refer to the
-  materials provided by \url{http://www.facit.org} for the particular
-  questionnaire you are using. In particular, refer to the left margin of the
-  official questionnaire (i.e., from facit.org) for the appropriate item
-  variable names.
+variables, appropriately named, this function generates the FACIT-AI
+scale score.  It is crucial that the item variables in the supplied data
+frame are named according to FACT conventions.  For example, the first item
+should be named GP1, the second GP2, and so on.  Please refer to the
+materials provided by \url{http://www.facit.org} for the particular
+questionnaire you are using. In particular, refer to the left margin of the
+official questionnaire (i.e., from facit.org) for the appropriate item
+variable names.
 
-  For more details on the \code{updateItems} and \code{keepNvalid} arguments,
-  see the documentation entry for \code{\link{scoreFACTG}} and
-  \code{\link{FACTscorer}}.
+For more details on the \code{updateItems} and \code{keepNvalid} arguments,
+see the documentation entry for \code{\link{scoreFACTG}} and
+\code{\link{FACTscorer}}.
 }
 \section{Note}{
 
-  Keep in mind that this function (and R in general) is
-  case-sensitive.
+Keep in mind that this function (and R in general) is
+case-sensitive.
 
-  All items in \code{df} should be \code{numeric} (i.e., of type
-  \code{integer} or \code{double}).
+All items in \code{df} should be \code{numeric} (i.e., of type
+\code{integer} or \code{double}).
 
-  This function expects missing item responses to be coded as \code{NA},
-  \code{8}, or \code{9}, and valid item responses to be coded as \code{0},
-  \code{1}, \code{2}, \code{3}, or \code{4}.  Any other value for any of the
-  items will result in an error message and no scores.
+This function expects missing item responses to be coded as \code{NA},
+\code{8}, or \code{9}, and valid item responses to be coded as \code{0},
+\code{1}, \code{2}, \code{3}, or \code{4}.  Any other value for any of the
+items will result in an error message and no scores.
 }
+
 \examples{
 ## FIRST creating a df with fake item data to score
 itemNames <- c('C6', 'GF5', 'BMT5', 'B1', 'GP2', 'O2', 'ACT11', 'O1',
@@ -100,15 +101,14 @@ summary(scoredDat['FACIT_AI'])
 }
 \references{
 FACIT-AI Scoring Guidelines, available at
-  \url{http://www.facit.org}
+\url{http://www.facit.org}
 }
 \seealso{
 For additional details on the function arguments, see
-  \code{\link{scoreFACTG}} and \code{\link{FACTscorer}}.  For brevity,
-  examples are omitted below.  However, this function is very similar to the
-  \code{\link{scoreFACTG7}} function.  See the documentation for
-  \code{\link{scoreFACTG7}} for examples.  Alternatively, examples for
-  \code{scoreFACIT_AI} can be accessed by running
-  \code{example(scoreFACIT_AI)}.
+\code{\link{scoreFACTG}} and \code{\link{FACTscorer}}.  For brevity,
+examples are omitted below.  However, this function is very similar to the
+\code{\link{scoreFACTG7}} function.  See the documentation for
+\code{\link{scoreFACTG7}} for examples.  Alternatively, examples for
+\code{scoreFACIT_AI} can be accessed by running
+\code{example(scoreFACIT_AI)}.
 }
-

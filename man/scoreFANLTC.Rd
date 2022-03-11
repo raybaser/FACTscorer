@@ -33,11 +33,11 @@ or, equivalently, set it to \code{FALSE}.}
 A data frame with the following scale scores is returned:
 
 \itemize{
-  \item \strong{PWB} - Physical Well-Being subscale
-  \item \strong{SWB} - Social/Family Well-Being subscale
-  \item \strong{EWB} - Emotional Well-Being subscale
-  \item \strong{FWB} - Physical Well-Being subscale
-  \item \strong{FANLTC} - FANLTC Total Score (PWB+SWB+EWB+FWB)
+\item \strong{PWB} - Physical Well-Being subscale
+\item \strong{SWB} - Social/Family Well-Being subscale
+\item \strong{EWB} - Emotional Well-Being subscale
+\item \strong{FWB} - Physical Well-Being subscale
+\item \strong{FANLTC} - FANLTC Total Score (PWB+SWB+EWB+FWB)
 }
 
 If a variable was given to the \code{id} argument, then that variable will
@@ -76,6 +76,7 @@ This scoring function expects missing item responses to be coded as NA,
 other value for any of the items will result in an error message and no
 scores.
 }
+
 \examples{
 \dontshow{
 ## FIRST creating a df with fake item data to score
@@ -112,10 +113,9 @@ S10–S17.
 }
 \seealso{
 See \code{\link{FACTscorer}} for more comprehensive information
-  about using the functions in this package.  This function is very similar
-  to the \code{\link{scoreFACTG}} function.  See the documentation for
-  \code{\link{scoreFACTG}} for more details on the arguments and for
-  examples.  For brevity, examples are omitted below, but can be accessed by
-  running \code{example(scoreFANLTC)}.
+about using the functions in this package.  This function is very similar
+to the \code{\link{scoreFACTG}} function.  See the documentation for
+\code{\link{scoreFACTG}} for more details on the arguments and for
+examples.  For brevity, examples are omitted below, but can be accessed by
+running \code{example(scoreFANLTC)}.
 }
-

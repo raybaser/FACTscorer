@@ -31,12 +31,12 @@ These optional variables have names of the format \code{SCALENAME_N}.
 The following scale scores are returned:
 
 \describe{
-  \item{PWB}{Physical Well-Being subscale}
- \item{TS}{Treatmnet Satisfation subscale}
-  \item{GP}{General Perceptions subscale}
-  \item{EWB}{Emotional Well-Being subscale}
-  \item{REL}{Relationships subscale}
-  \item{FACIT_CD_TOTAL}{FACIT-CD Total Score (i.e., PWB+TS+GP+EWB+REL)}
+\item{PWB}{Physical Well-Being subscale}
+\item{TS}{Treatmnet Satisfation subscale}
+\item{GP}{General Perceptions subscale}
+\item{EWB}{Emotional Well-Being subscale}
+\item{REL}{Relationships subscale}
+\item{FACIT_CD_TOTAL}{FACIT-CD Total Score (i.e., PWB+TS+GP+EWB+REL)}
 }
 }
 \description{
@@ -78,6 +78,7 @@ provided.  If set to \code{TRUE}, any item that is supposed to be
 reverse coded will be replaced with its reversed version in the data
 frame returned by \code{scoreFACIT_CD}.
 }
+
 \examples{
 ## Setting up item names for fake data
 AC_names1 <- c('CD1', 'CD2', 'CD3', 'Cx1', 'GP5', 'ES8', 'CD4', 'CD5')
@@ -119,4 +120,3 @@ summary(scoredDat[, c('PWB', 'TS', 'GP', 'EWB', 'REL', 'FACIT_CD_TOTAL')])
 \references{
 FACIT-CD Scoring Guidelines, available at \url{http://www.facit.org}
 }
-

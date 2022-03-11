@@ -1,20 +1,20 @@
-#' @title Score the FACT-B+4 
-#' 
+#' @title Score the FACT-B+4
+#'
 #' @description
 #' Generates all of the scores of the Functional Assessment of Cancer Therapy - Breast Cancer
 #' (FACT-B+4, v4) for patients with Lymphedema (to be used with FACT-B) from item responses.
-#' 
+#'
 #' @details
-#' Given a data frame that includes all of the FACT-B+4 (Version 4) items as 
-#' variables, appropriately named, this function generates all of the FACT-B+4 
-#' scale scores.  It is crucial that the item variables in the supplied data 
-#' frame are named according to FACT conventions.  For example, the first 
-#' physical well-being item should be named GP1, the second GP2, and so on.  
+#' Given a data frame that includes all of the FACT-B+4 (Version 4) items as
+#' variables, appropriately named, this function generates all of the FACT-B+4
+#' scale scores.  It is crucial that the item variables in the supplied data
+#' frame are named according to FACT conventions.  For example, the first
+#' physical well-being item should be named GP1, the second GP2, and so on.
 #' Please refer to the materials provided by \url{http://www.facit.org} for the
 #' particular questionnaire you are using.  In particular, refer to the left
 #' margin of the official questionnaire (i.e., from facit.org) for the
 #' appropriate item variable names.
-#' 
+#'
 #' @section Note:
 #' Keep in mind that this function (and R in general) is case-sensitive.
 #'
@@ -37,21 +37,21 @@
 #' provided.  If set to \code{TRUE}, any item that is supposed to be
 #' reverse coded will be replaced with its reversed version in the data
 #' frame returned by \code{scoreFACT_Bplus4}.
-#' 
-#' 
+#'
+#'
 #' @param df A data frame with the FACT-B+4 items, appropriately-named.
 #' @param updateItems Logical, if \code{TRUE} any original item that is
 #' reverse coded for scoring will be replaced by its reverse coded version
 #' in the returned data frame, and any values of 8 or 9 will be replaced
 #' with NA.  The default, \code{FALSE}, returns the original items
-#' unmodified.  
+#' unmodified.
 #' @param keepNvalid Logical, if \code{TRUE} the function
 #' returns an additional variable for each of the returned scale scores
 #' containing the number of valid, non-missing responses from each
 #' respondent to the items on the given scale.  If \code{FALSE} (the
 #' default), these variables are omitted from the returned data frame.
-#' 
-#' 
+#'
+#'
 #' @return The original data frame is returned (optionally with modified
 #' items if \code{updateItems = TRUE}) with new variables corresponding to
 #' the scored scales. If \code{keepNvalid = TRUE}, for each scored scale an
@@ -59,7 +59,7 @@
 #' responses each respondent made to the items making up the given scale.
 #' These optional variables have names of the format \code{SCALENAME_N}.
 #' The following scale scores are returned:
-#' 
+#'
 #' \describe{
 #'   \item{PWB}{Physical Well-Being subscale}
 #'   \item{SWB}{Social/Family Well-Being subscale}
@@ -71,16 +71,16 @@
 #'   \item{FACT_B_TOTAL}{FACT-B Total Score (i.e., PWB+SWB+EWB+FWB+BCS)}
 #'   \item{FACT_B_TOI}{FACT-B Trial Outcome Index (e.g., PWB+FWB+BCS)}
 #' }
-#' 
+#'
 #' @references FACT-B+4 Scoring Guidelines, available at \url{http://www.facit.org}
-#' 
+#'
 #' @export
-#' 
+#'
 #' @examples
 #' ## Setting up item names for fake data
-#' G_names <- c(paste0('GP', 1:7), 
-#'              paste0('GS', 1:7), 
-#'              paste0('GE', 1:6), 
+#' G_names <- c(paste0('GP', 1:7),
+#'              paste0('GS', 1:7),
+#'              paste0('GE', 1:6),
 #'              paste0('GF', 1:7))
 #' AC_names1 <- c('B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9')
 #' AC_names2 <- c('B3', 'B10', 'B11', 'B12', 'B13')
@@ -89,19 +89,19 @@
 #' ## Generating random item responses for 8 fake respondents
 #' set.seed(6375309)
 #' exampleDat <- t(replicate(8, sample(0:4, size = length(itemNames), replace = TRUE)))
-#' ## Making half of respondents missing about 10% of items, 
+#' ## Making half of respondents missing about 10% of items,
 #' ## half missing about 50%.
-#' miss10 <- t(replicate(4, sample(c(0, 9), prob = c(0.9, 0.1), 
+#' miss10 <- t(replicate(4, sample(c(0, 9), prob = c(0.9, 0.1),
 #'     size = length(itemNames), replace = TRUE)))
-#' miss50 <- t(replicate(4, sample(c(0, 9), prob = c(0.5, 0.5), 
+#' miss50 <- t(replicate(4, sample(c(0, 9), prob = c(0.5, 0.5),
 #'     size = length(itemNames), replace = TRUE)))
 #' missMtx <- rbind(miss10, miss50)
 #' ## Using 9 as the code for missing responses
 #' exampleDat[missMtx == 9] <- 9
-#' exampleDat <- as.data.frame(cbind(ID = paste0('ID', 1:8), 
+#' exampleDat <- as.data.frame(cbind(ID = paste0('ID', 1:8),
 #'     as.data.frame(exampleDat)))
 #' names(exampleDat) <- c('ID', itemNames)
-#' 
+#'
 #' ## Returns data frame with scale scores and with original items untouched
 #' scoredDat <- scoreFACT_Bplus4(exampleDat)
 #' names(scoredDat)
@@ -112,23 +112,22 @@
 #' scoredDat <- scoreFACT_Bplus4(exampleDat, updateItems = TRUE, keepNvalid = TRUE)
 #' names(scoredDat)
 #' ## Descriptives of scored scales
-#' summary(scoredDat[, c('PWB', 'SWB', 'EWB', 'FWB', 'FACTG', 
+#' summary(scoredDat[, c('PWB', 'SWB', 'EWB', 'FWB', 'FACTG',
 #'                       'BCS', 'ARM', 'FACT_B_TOTAL', 'FACT_B_TOI')])
 scoreFACT_Bplus4 <- function(df, updateItems = FALSE, keepNvalid = FALSE) {
     dfG <- scoreFACTG(df, updateItems = updateItems, keepNvalid = TRUE)
     dfGup <- dfG
     names(dfGup) <- toupper(names(dfG))
-    G_names <- c(paste0("GP", 1:7), paste0("GS", 1:7), paste0("GE", 1:6), 
+    G_names <- c(paste0("GP", 1:7), paste0("GS", 1:7), paste0("GE", 1:6),
         paste0("GF", 1:7))
     AC_names1 <- c("B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9")
     AC_names2 <- c("B3", "B10", "B11", "B12", "B13")
     AC_names <- unique(c(AC_names1, AC_names2))
-    revNames <- unique(c("B1", "B2", "B3", "B5", "B6", "B7", "B8", "B3", 
+    revNames <- unique(c("B1", "B2", "B3", "B5", "B6", "B7", "B8", "B3",
         "B10", "B11", "B12", "B13"))
     AC_items <- dfGup[, AC_names]
     if (any(!(as.matrix(AC_items) %in% c(0:4, 8, 9, NA)))) {
         stop("At least 1 response is out of range (i.e., not 0-4, 8, 9, or NA)")
-        break
     }
     makeMiss <- function(x) {
         x[x %in% c(8, 9)] <- NA
@@ -143,10 +142,10 @@ scoreFACT_Bplus4 <- function(df, updateItems = FALSE, keepNvalid = FALSE) {
     AC_N1 <- rowSums(valid_N[, AC_names1])
     AC_N2 <- rowSums(valid_N[, AC_names2])
     TOTAL_N <- dfG$PWB_N + dfG$SWB_N + dfG$EWB_N + dfG$FWB_N + AC_N1
-    AC1 <- round(rowMeans(AC_items[, AC_names1], na.rm = TRUE) * length(AC_names1), 
+    AC1 <- round(rowMeans(AC_items[, AC_names1], na.rm = TRUE) * length(AC_names1),
         3)
     AC1[AC_N1/length(AC_names1) <= 0.5] <- NA
-    AC2 <- round(rowMeans(AC_items[, AC_names2], na.rm = TRUE) * length(AC_names2), 
+    AC2 <- round(rowMeans(AC_items[, AC_names2], na.rm = TRUE) * length(AC_names2),
         3)
     AC2[AC_N2/length(AC_names2) <= 0.5] <- NA
     TOTAL <- dfG$PWB + dfG$SWB + dfG$EWB + dfG$FWB + AC1
@@ -160,13 +159,13 @@ scoreFACT_Bplus4 <- function(df, updateItems = FALSE, keepNvalid = FALSE) {
     FACT_B_TOTAL <- TOTAL
     FACT_B_TOI <- TOI
     if (updateItems) {
-        dfItemPos <- unlist(sapply(AC_names, function(x) grep(x, names(dfG), 
+        dfItemPos <- unlist(sapply(AC_names, function(x) grep(x, names(dfG),
             ignore.case = TRUE, value = FALSE)))
         names(dfG)[dfItemPos] <- toupper(names(dfG)[dfItemPos])
         dfG[, AC_names] <- AC_items
     }
     if (keepNvalid) {
-        dfOut <- as.data.frame(cbind(dfG, BCS_N, ARM_N, FACT_B_TOTAL_N, 
+        dfOut <- as.data.frame(cbind(dfG, BCS_N, ARM_N, FACT_B_TOTAL_N,
             ARM, BCS, FACT_B_TOTAL, FACT_B_TOI))
     } else {
         dfG[, "PWB_N"] <- NULL
@@ -177,4 +176,4 @@ scoreFACT_Bplus4 <- function(df, updateItems = FALSE, keepNvalid = FALSE) {
         dfOut <- as.data.frame(cbind(dfG, BCS, ARM, FACT_B_TOTAL, FACT_B_TOI))
     }
     return(dfOut)
-} 
+}

@@ -4,8 +4,13 @@
 \alias{scoreFACT_CNS}
 \title{Score the FACT-CNS}
 \usage{
-scoreFACT_CNS(df, id = NULL, AConly = FALSE, updateItems = FALSE,
-  keepNvalid = FALSE)
+scoreFACT_CNS(
+  df,
+  id = NULL,
+  AConly = FALSE,
+  updateItems = FALSE,
+  keepNvalid = FALSE
+)
 }
 \arguments{
 \item{df}{A data frame with the questionnaire items, appropriately-named.}
@@ -40,14 +45,14 @@ or, equivalently, set it to \code{FALSE}.}
 A data frame with the following scale scores is returned:
 
 \itemize{
-  \item \strong{PWB} - Physical Well-Being subscale
-  \item \strong{SWB} - Social/Family Well-Being subscale
-  \item \strong{EWB} - Emotional Well-Being subscale
-  \item \strong{FWB} - Physical Well-Being subscale
-  \item \strong{FACTG} - FACT-G Total Score (PWB+SWB+EWB+FWB)
-  \item \strong{CNSS} - Central Nervous System subscale
-  \item \strong{FACT_CNS_TOTAL} - FACT-CNS Total Score (PWB+SWB+EWB+FWB+CNSS)
-  \item \strong{FACT_CNS_TOI} - FACT-CNS Trial Outcome Index (PWB+FWB+CNSS)
+\item \strong{PWB} - Physical Well-Being subscale
+\item \strong{SWB} - Social/Family Well-Being subscale
+\item \strong{EWB} - Emotional Well-Being subscale
+\item \strong{FWB} - Physical Well-Being subscale
+\item \strong{FACTG} - FACT-G Total Score (PWB+SWB+EWB+FWB)
+\item \strong{CNSS} - Central Nervous System subscale
+\item \strong{FACT_CNS_TOTAL} - FACT-CNS Total Score (PWB+SWB+EWB+FWB+CNSS)
+\item \strong{FACT_CNS_TOI} - FACT-CNS Trial Outcome Index (PWB+FWB+CNSS)
 }
 
 If \code{AConly = TRUE}, the only scale score returned is \strong{CNSS}.
@@ -58,47 +63,48 @@ variables will be returned if \code{updateItems = TRUE} or \code{keepNvalid =
 TRUE}.
 }
 \description{
-Generates all of the scores of the Functional Assessment of Cancer Therapy - 
+Generates all of the scores of the Functional Assessment of Cancer Therapy -
 Central Nervous System (FACT-CNS, v4) from item responses.
 }
 \details{
 Given a data frame that includes all of the FACT-CNS (Version
-  4) items as variables, appropriately named, this function generates all of
-  the FACT-CNS scale scores.  It is crucial that the item variables in
-  the supplied data frame are named according to FACT conventions.  For
-  example, the first physical well-being item should be named GP1, the second
-  GP2, and so on. Please refer to the materials provided by
-  \url{http://www.facit.org} for the particular questionnaire you are using.
-  In particular, refer to the left margin of the official questionnaire
-  (i.e., from facit.org) for the appropriate item variable names.
+4) items as variables, appropriately named, this function generates all of
+the FACT-CNS scale scores.  It is crucial that the item variables in
+the supplied data frame are named according to FACT conventions.  For
+example, the first physical well-being item should be named GP1, the second
+GP2, and so on. Please refer to the materials provided by
+\url{http://www.facit.org} for the particular questionnaire you are using.
+In particular, refer to the left margin of the official questionnaire
+(i.e., from facit.org) for the appropriate item variable names.
 
-  This questionnaire consists of two components: (1) FACT-G items and (2)
-  "Additional Concerns" items.  The FACT-G items (G for General) measure
-  general aspects of QoL common to all cancer patients. The "Additional
-  Concerns" items measure issues relevant for a specific cancer type,
-  treatment, or symptom. These two questionnaire components are typically
-  administered together. In some studies, however, ONLY the "Additional
-  Concerns" items are administered. The \code{AConly} argument is provided to
-  accommodate such cases, and should be set to \code{AConly = TRUE} if ONLY
-  the "Additional Concerns" items were administered.
+This questionnaire consists of two components: (1) FACT-G items and (2)
+"Additional Concerns" items.  The FACT-G items (G for General) measure
+general aspects of QoL common to all cancer patients. The "Additional
+Concerns" items measure issues relevant for a specific cancer type,
+treatment, or symptom. These two questionnaire components are typically
+administered together. In some studies, however, ONLY the "Additional
+Concerns" items are administered. The \code{AConly} argument is provided to
+accommodate such cases, and should be set to \code{AConly = TRUE} if ONLY
+the "Additional Concerns" items were administered.
 
-  For more details on the \code{updateItems} and \code{keepNvalid} arguments,
-  see the documentation entry for \code{\link{scoreFACTG}} and
-  \code{\link{FACTscorer}}.
+For more details on the \code{updateItems} and \code{keepNvalid} arguments,
+see the documentation entry for \code{\link{scoreFACTG}} and
+\code{\link{FACTscorer}}.
 }
 \section{Note}{
 
-  Keep in mind that this function (and R in general) is
-  case-sensitive.
+Keep in mind that this function (and R in general) is
+case-sensitive.
 
-  All items in \code{df} should be \code{numeric} (i.e., of type
-  \code{integer} or \code{double}).
+All items in \code{df} should be \code{numeric} (i.e., of type
+\code{integer} or \code{double}).
 
-  This function expects missing item responses to be coded as \code{NA},
-  \code{8}, or \code{9}, and valid item responses to be coded as \code{0},
-  \code{1}, \code{2}, \code{3}, or \code{4}.  Any other value for any of the
-  items will result in an error message and no scores.
+This function expects missing item responses to be coded as \code{NA},
+\code{8}, or \code{9}, and valid item responses to be coded as \code{0},
+\code{1}, \code{2}, \code{3}, or \code{4}.  Any other value for any of the
+items will result in an error message and no scores.
 }
+
 \examples{
 \dontshow{
 ## FIRST creating a df with fake item data to score
@@ -135,14 +141,13 @@ summary(scoredDat[, c('PWB', 'SWB', 'EWB', 'FWB', 'FACTG',
 }
 \references{
 FACT-CNS Scoring Guidelines, available at
-  \url{http://www.facit.org}
+\url{http://www.facit.org}
 }
 \seealso{
 This function is very similar to the \code{\link{scoreFACT_B}}
-  function.  See the documentation for \code{\link{scoreFACT_B}} for more
-  details on the arguments and for examples.  Also see the documentation
-  entry for the \code{\link{FACTscorer}} package.  For brevity, examples are
-  omitted below, but can be accessed by running
-  \code{example(scoreFACT_CNS)}.
+function.  See the documentation for \code{\link{scoreFACT_B}} for more
+details on the arguments and for examples.  Also see the documentation
+entry for the \code{\link{FACTscorer}} package.  For brevity, examples are
+omitted below, but can be accessed by running
+\code{example(scoreFACT_CNS)}.
 }
-

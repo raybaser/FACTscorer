@@ -31,16 +31,16 @@ These optional variables have names of the format \code{SCALENAME_N}.
 The following scale scores are returned:
 
 \describe{
-  \item{PWB}{Physical Well-Being subscale}
-  \item{SWB}{Social/Family Well-Being subscale}
-  \item{EWB}{Emotional Well-Being subscale}
-  \item{FWB}{Physical Well-Being subscale}
-  \item{FACTG}{FACT-G Total Score (i.e., PWB+SWB+EWB+FWB)}
-  \item{ESS_19}{19-item Endocrine Symptom subscale}
-  \item{ESS_23}{23-item Endocrine Symptom subscale}
-  \item{BCS}{Breast Cancer subscale}
-  \item{FACT_ES_TOTAL}{FACT-ES Total Score (i.e., PWB+SWB+EWB+FWB+ESS_19+ESS_23+BCS)}
-  \item{FACT_ES_TOI}{FACT-ES Trial Outcome Index (e.g., PWB+FWB+ESS_19+ESS_23+BCS)}
+\item{PWB}{Physical Well-Being subscale}
+\item{SWB}{Social/Family Well-Being subscale}
+\item{EWB}{Emotional Well-Being subscale}
+\item{FWB}{Physical Well-Being subscale}
+\item{FACTG}{FACT-G Total Score (i.e., PWB+SWB+EWB+FWB)}
+\item{ESS_19}{19-item Endocrine Symptom subscale}
+\item{ESS_23}{23-item Endocrine Symptom subscale}
+\item{BCS}{Breast Cancer subscale}
+\item{FACT_ES_TOTAL}{FACT-ES Total Score (i.e., PWB+SWB+EWB+FWB+ESS_19+ESS_23+BCS)}
+\item{FACT_ES_TOI}{FACT-ES Trial Outcome Index (e.g., PWB+FWB+ESS_19+ESS_23+BCS)}
 }
 }
 \description{
@@ -83,6 +83,7 @@ provided.  If set to \code{TRUE}, any item that is supposed to be
 reverse coded will be replaced with its reversed version in the data
 frame returned by \code{scoreFACT_ES}.
 }
+
 \examples{
 ## Setting up item names for fake data
 G_names <- c(paste0('GP', 1:7),
@@ -129,4 +130,3 @@ summary(scoredDat[, c('PWB', 'SWB', 'EWB', 'FWB', 'FACTG',
 \references{
 FACT-ES Scoring Guidelines, available at \url{http://www.facit.org}
 }
-

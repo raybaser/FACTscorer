@@ -45,7 +45,7 @@
 #' (exampleDat <- make_FACTdata(namesAC = itemNames))
 #' (exampleDat <- make_FACTdata(namesAC = itemNames, AConly = TRUE))
 make_FACTdata <- function(namesAC = NULL, N = 8, AConly = FALSE,
-                          pmiss1 = 0.10, pmiss2 = 0.50) {
+                          pmiss1 = 0.10, pmiss2 = 0.50, misscode = NA) {
 
   ## Setting up item names for fake data
   G_names <- c(paste0('GP', 1:7),
@@ -72,8 +72,8 @@ make_FACTdata <- function(namesAC = NULL, N = 8, AConly = FALSE,
   miss50 <- t(replicate(N*0.5, sample(c(0, 9), prob = c(1 - pmiss2, pmiss2),
                                       size = length(itemNames), replace = TRUE)))
   missMtx <- rbind(miss10, miss50)
-  ## Using 9 as the code for missing responses
-  exampleDat[missMtx == 9] <- 9
+  ## Using NA (instead of 9) as the code for missing responses
+  exampleDat[missMtx == 9] <- misscode
   exampleDat <- as.data.frame(cbind(ID = paste0('ID', 1:N),
                                     as.data.frame(exampleDat)))
   names(exampleDat) <- c('ID', itemNames)

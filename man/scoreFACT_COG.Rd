@@ -31,10 +31,10 @@ These optional variables have names of the format \code{SCALENAME_N}.
 The following scale scores are returned:
 
 \describe{
-  \item{CogPCI}{Perceived Cognitive Impairments subscale}
- \item{CogQOL}{Impact of perceived cognitive impairments on quality of life subscale}
-  \item{CogOth}{Comments from Others subscale}
-  \item{CogPCA}{Perceived Cognitive Abilities subscale}
+\item{CogPCI}{Perceived Cognitive Impairments subscale}
+\item{CogQOL}{Impact of perceived cognitive impairments on quality of life subscale}
+\item{CogOth}{Comments from Others subscale}
+\item{CogPCA}{Perceived Cognitive Abilities subscale}
 }
 }
 \description{
@@ -76,6 +76,7 @@ provided.  If set to \code{TRUE}, any item that is supposed to be
 reverse coded will be replaced with its reversed version in the data
 frame returned by \code{scoreFACT_COG}.
 }
+
 \examples{
 ## Setting up item names for fake data
 AC_names1 <- c('CogA1', 'CogA3', 'CogC7', 'CogM9', 'CogM10', 'CogM12', 'CogV13',
@@ -117,4 +118,3 @@ summary(scoredDat[, c('CogPCI', 'CogQOL', 'CogOth', 'CogPCA')])
 \references{
 FACT-COG Scoring Guidelines, available at \url{http://www.facit.org}
 }
-

@@ -31,27 +31,27 @@ These optional variables have names of the format \code{SCALENAME_N}.
 The following scale scores are returned:
 
 \describe{
-  \item{PWB}{Physical Well-Being subscale}
-  \item{SWB}{Social/Family Well-Being subscale}
-  \item{EWB}{Emotional Well-Being subscale}
-  \item{FWB}{Physical Well-Being subscale}
-  \item{FACTG}{FACT-G Total Score (i.e., PWB+SWB+EWB+FWB)}
-  \item{BRMP}{Biologic Response Modifier Physical subscale}
- \item{BRMCE}{Biologic Response Modifier Cognitive/Emotional subscale}
-  \item{FACT_BRM_TOTAL}{FACT-BRM Total Score (i.e., PWB+SWB+EWB+FWB+BRMP+BRMCE)}
-  \item{FACT_BRM_TOI}{FACT-BRM Trial Outcome Index (e.g., PWB+FWB+BRMP+BRMCE)}
+\item{PWB}{Physical Well-Being subscale}
+\item{SWB}{Social/Family Well-Being subscale}
+\item{EWB}{Emotional Well-Being subscale}
+\item{FWB}{Physical Well-Being subscale}
+\item{FACTG}{FACT-G Total Score (i.e., PWB+SWB+EWB+FWB)}
+\item{BRMP}{Biologic Response Modifier Physical subscale}
+\item{BRMCE}{Biologic Response Modifier Cognitive/Emotional subscale}
+\item{FACT_BRM_TOTAL}{FACT-BRM Total Score (i.e., PWB+SWB+EWB+FWB+BRMP+BRMCE)}
+\item{FACT_BRM_TOI}{FACT-BRM Trial Outcome Index (e.g., PWB+FWB+BRMP+BRMCE)}
 }
 }
 \description{
-Generates all of the scores of the Functional Assessment of Cancer Therapy - 
+Generates all of the scores of the Functional Assessment of Cancer Therapy -
 Biologic Response Modifier (FACT-BRM, v4) from item responses.
 }
 \details{
-Given a data frame that includes all of the FACT-BRM (Version 4) items as 
-variables, appropriately named, this function generates all of the FACT-BRM 
-scale scores.  It is crucial that the item variables in the supplied data 
-frame are named according to FACT conventions.  For example, the first 
-physical well-being item should be named GP1, the second GP2, and so on.  
+Given a data frame that includes all of the FACT-BRM (Version 4) items as
+variables, appropriately named, this function generates all of the FACT-BRM
+scale scores.  It is crucial that the item variables in the supplied data
+frame are named according to FACT conventions.  For example, the first
+physical well-being item should be named GP1, the second GP2, and so on.
 Please refer to the materials provided by \url{http://www.facit.org} for the
 particular questionnaire you are using.  In particular, refer to the left
 margin of the official questionnaire (i.e., from facit.org) for the
@@ -81,11 +81,12 @@ provided.  If set to \code{TRUE}, any item that is supposed to be
 reverse coded will be replaced with its reversed version in the data
 frame returned by \code{scoreFACT_BRM}.
 }
+
 \examples{
 ## Setting up item names for fake data
-G_names <- c(paste0('GP', 1:7), 
-             paste0('GS', 1:7), 
-             paste0('GE', 1:6), 
+G_names <- c(paste0('GP', 1:7),
+             paste0('GS', 1:7),
+             paste0('GE', 1:6),
              paste0('GF', 1:7))
 AC_names1 <- c('BMT6', 'HI12', 'C6', 'BRM1', 'BRM2', 'BRM3', 'BRM10')
 AC_names2 <- c('HI8', 'HI9', 'BRM7', 'BRM8', 'BRM9', 'HI6')
@@ -94,16 +95,16 @@ itemNames <- c(G_names, AC_names)
 ## Generating random item responses for 8 fake respondents
 set.seed(6375309)
 exampleDat <- t(replicate(8, sample(0:4, size = length(itemNames), replace = TRUE)))
-## Making half of respondents missing about 10\% of items, 
+## Making half of respondents missing about 10\% of items,
 ## half missing about 50\%.
-miss10 <- t(replicate(4, sample(c(0, 9), prob = c(0.9, 0.1), 
+miss10 <- t(replicate(4, sample(c(0, 9), prob = c(0.9, 0.1),
     size = length(itemNames), replace = TRUE)))
-miss50 <- t(replicate(4, sample(c(0, 9), prob = c(0.5, 0.5), 
+miss50 <- t(replicate(4, sample(c(0, 9), prob = c(0.5, 0.5),
     size = length(itemNames), replace = TRUE)))
 missMtx <- rbind(miss10, miss50)
 ## Using 9 as the code for missing responses
 exampleDat[missMtx == 9] <- 9
-exampleDat <- as.data.frame(cbind(ID = paste0('ID', 1:8), 
+exampleDat <- as.data.frame(cbind(ID = paste0('ID', 1:8),
     as.data.frame(exampleDat)))
 names(exampleDat) <- c('ID', itemNames)
 
@@ -117,10 +118,9 @@ scoredDat
 scoredDat <- scoreFACT_BRM(exampleDat, updateItems = TRUE, keepNvalid = TRUE)
 names(scoredDat)
 ## Descriptives of scored scales
-summary(scoredDat[, c('PWB', 'SWB', 'EWB', 'FWB', 'FACTG', 
+summary(scoredDat[, c('PWB', 'SWB', 'EWB', 'FWB', 'FACTG',
                       'BRMP', 'BRMCE', 'FACT_BRM_TOTAL', 'FACT_BRM_TOI')])
 }
 \references{
 FACT-BRM Scoring Guidelines, available at \url{http://www.facit.org}
 }
-

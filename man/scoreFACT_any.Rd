@@ -4,9 +4,17 @@
 \alias{scoreFACT_any}
 \title{Master function to score most FACT/FACIT instruments}
 \usage{
-scoreFACT_any(df, id = NULL, namesAC = NULL, namesRev = NULL,
-  nameSub = "XX_SUB", nameTot = "FACT_XX", AConly = FALSE,
-  updateItems = FALSE, keepNvalid = FALSE)
+scoreFACT_any(
+  df,
+  id = NULL,
+  namesAC = NULL,
+  namesRev = NULL,
+  nameSub = "XX_SUB",
+  nameTot = "FACT_XX",
+  AConly = FALSE,
+  updateItems = FALSE,
+  keepNvalid = FALSE
+)
 }
 \arguments{
 \item{df}{A data frame with the questionnaire items, appropriately-named.}
@@ -58,14 +66,14 @@ or, equivalently, set it to \code{FALSE}.}
 A data frame with the following scale scores is returned:
 
 \itemize{
-  \item \strong{PWB} - Physical Well-Being subscale
-  \item \strong{SWB} - Social/Family Well-Being subscale
-  \item \strong{EWB} - Emotional Well-Being subscale
-  \item \strong{FWB} - Physical Well-Being subscale
-  \item \strong{FACTG} - FACT-G Total Score (PWB+SWB+EWB+FWB)
-  \item \strong{AC_SUB} - AC subscale score
-  \item \strong{FACT_AC_TOTAL} - The AC-Specific Total Score (PWB+SWB+EWB+FWB+AC_SUB)
-  \item \strong{FACT_AC_TOI} - The AC-Specific Trial Outcome Index (PWB+FWB+AC_SUB)
+\item \strong{PWB} - Physical Well-Being subscale
+\item \strong{SWB} - Social/Family Well-Being subscale
+\item \strong{EWB} - Emotional Well-Being subscale
+\item \strong{FWB} - Physical Well-Being subscale
+\item \strong{FACTG} - FACT-G Total Score (PWB+SWB+EWB+FWB)
+\item \strong{AC_SUB} - AC subscale score
+\item \strong{FACT_AC_TOTAL} - The AC-Specific Total Score (PWB+SWB+EWB+FWB+AC_SUB)
+\item \strong{FACT_AC_TOI} - The AC-Specific Trial Outcome Index (PWB+FWB+AC_SUB)
 }
 
 If \code{AConly = TRUE}, the only scale score returned is \strong{AC_SUB}.
@@ -75,27 +83,30 @@ also be in the returned data frame. Additional, relatively unimportant,
 variables will be returned if \code{updateItems = TRUE} or \code{keepNvalid =
 TRUE}.
 }
+\description{
+Master function to score most FACT/FACIT instruments
+}
 \details{
 This is the workhorse function called by most of the other functions in this
 package.  It can score the majority of the instruments in the FACT/FACIT
 family of questionnaires.  Specifically, it can score any instrument that
 fits one of these two formats:
 \enumerate{
-  \item \strong{FACT-G + AC}: Measures comprised of the FACT-G (General)
-  items plus a set of "Additional Concerns" (AC) items that produce a single
-  subscale score.  Most of the FACT/FACIT instruments conform to this format,
-  and follow a uniform scoring procedure that produces all of the FACT-G
-  scores (PWB, SWB, EWB, FWB, and FACT-G Total Score), the AC subscale score
-  (AC_SUB), the AC-specific Trial Outcome Index (TOI, PWB+FWB+AC_SUB), and the
-  AC-specific Total Score (PWB+SWB+EWB+FWB+AC_SUB).
-  \item \strong{AC Only}: Measures comprised of only "Additional Concerns"
-  (AC) items (or any set of items) that produce a single score.  This is
-  relevant for cases in which \strong{only} the AC items were administered
-  from a more comprehensive instrument (e.g., one that originally included
-  FACT-G + AC items).  This is also relevant for some of the symptom indexes
-  and other single-score measures.  These AC-only and single-score measures
-  can be scored by setting \code{AConly = TRUE}.
-  }
+\item \strong{FACT-G + AC}: Measures comprised of the FACT-G (General)
+items plus a set of "Additional Concerns" (AC) items that produce a single
+subscale score.  Most of the FACT/FACIT instruments conform to this format,
+and follow a uniform scoring procedure that produces all of the FACT-G
+scores (PWB, SWB, EWB, FWB, and FACT-G Total Score), the AC subscale score
+(AC_SUB), the AC-specific Trial Outcome Index (TOI, PWB+FWB+AC_SUB), and the
+AC-specific Total Score (PWB+SWB+EWB+FWB+AC_SUB).
+\item \strong{AC Only}: Measures comprised of only "Additional Concerns"
+(AC) items (or any set of items) that produce a single score.  This is
+relevant for cases in which \strong{only} the AC items were administered
+from a more comprehensive instrument (e.g., one that originally included
+FACT-G + AC items).  This is also relevant for some of the symptom indexes
+and other single-score measures.  These AC-only and single-score measures
+can be scored by setting \code{AConly = TRUE}.
+}
 }
 \examples{
 ## Create vectors of item names
@@ -120,4 +131,3 @@ scoredDat <- scoreFACT_any(df = exampleDat,
                AConly = TRUE)
 scoredDat
 }
-
