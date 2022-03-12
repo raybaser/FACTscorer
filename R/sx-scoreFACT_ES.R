@@ -117,6 +117,7 @@ scoreFACT_ES <- function(df, updateItems = FALSE, keepNvalid = FALSE) {
     dfG <- scoreFACTG(df, updateItems = updateItems, keepNvalid = TRUE)
     dfGup <- dfG
     names(dfGup) <- toupper(names(dfGup))
+    names(df) <- toupper(names(df))
     G_names <- c(paste0("GP", 1:7), paste0("GS", 1:7), paste0("GE", 1:6),
         paste0("GF", 1:7))
     AC_names <- toupper(c("ES1", "ES2", "ES3", "ES4", "ES5", "ES6", "ES7",
@@ -125,7 +126,7 @@ scoreFACT_ES <- function(df, updateItems = FALSE, keepNvalid = FALSE) {
     revNames <- toupper(c("ES1", "ES2", "ES3", "ES4", "ES5", "ES6", "ES7",
         "ES8", "ES9", "ES10", "An9", "O2", "C5", "An10", "Tax1", "ES11",
         "ES12", "ES13"))
-    AC_items <- dfGup[, AC_names]
+    AC_items <- df[, AC_names]
     if (any(!(as.matrix(AC_items) %in% c(0:4, 8, 9, NA)))) {
         stop("At least 1 response is out of range (i.e., not 0-4, 8, 9, or NA)")
     }

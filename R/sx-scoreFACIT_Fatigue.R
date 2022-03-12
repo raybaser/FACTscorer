@@ -9,7 +9,7 @@
 #'
 #'
 #' @templateVar MEASURE FACIT-Fatigue
-#' @templateVar NAMESUB FACIT-Fatigue
+#' @templateVar NAMESUB FACIT_Fatigue
 #' @templateVar SCORENAME FACIT Fatigue
 #' @templateVar SCOREFUN scoreFACIT_Fatigue
 #' @template details1score
@@ -26,13 +26,13 @@
 #' @export
 scoreFACIT_Fatigue <- function(df, id = NULL, updateItems = FALSE,
                           keepNvalid = FALSE){
-  
+
   df_scores <- scoreFACT_any(
     df = df,
     id = id,
-    namesAC = c("HI7", "HI12", "An1", "An2", "An3", "An4", 
+    namesAC = c("HI7", "HI12", "An1", "An2", "An3", "An4",
                 "An5", "An7", "An8", "An12", "An14", "An15", "An16"),
-    namesRev = c("HI7", "HI12", "An1", "An2", "An3", "An4", "An8", 
+    namesRev = c("HI7", "HI12", "An1", "An2", "An3", "An4", "An8",
                  "An12", "An14", "An15", "An16"),
     nameSub = "FACIT_Fatigue",
     AConly = TRUE,

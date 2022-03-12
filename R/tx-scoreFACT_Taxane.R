@@ -1,9 +1,9 @@
-#' @title Score the FACT-Taxane 
-#' 
+#' @title Score the FACT-Taxane
+#'
 #' @description
-#' Generates all of the scores of the Functional Assessment of Cancer Therapy - 
+#' Generates all of the scores of the Functional Assessment of Cancer Therapy -
 #' Taxane (FACT-Taxane, v4) from item responses.
-#' 
+#'
 #' @templateVar MEASURE FACT-Taxane
 #' @templateVar SCOREFUN scoreFACT_Taxane
 #' @template templateDetailsAC
@@ -35,16 +35,16 @@
 #' @references FACT-Taxane Scoring Guidelines, available at
 #'   \url{http://www.facit.org}
 #'
-#' 
+#'
 #'
 #' @export
-#' 
+#'
 #' @examples
 #' \dontshow{
 #' ## FIRST creating a df with fake item data to score
-#' itemNames <- c('Ntx1', 'Ntx2', 'Ntx3', 'Ntx4', 'Ntx5', 'HI12', 
-#' 'Ntx6', 'Ntx7', 'Ntx8', 'Ntx9', 'An6', 'Tax1', 'Tax2', 'Tax3', 
-#' 'Tax4', 'Tax5'))
+#' itemNames <- c('Ntx1', 'Ntx2', 'Ntx3', 'Ntx4', 'Ntx5', 'HI12',
+#' 'Ntx6', 'Ntx7', 'Ntx8', 'Ntx9', 'An6', 'Tax1', 'Tax2', 'Tax3',
+#' 'Tax4', 'Tax5')
 #' exampleDat <- make_FACTdata(namesAC = itemNames)
 #'
 #' ## NOW scoring the items in exampleDat
@@ -70,8 +70,8 @@
 #' scoredDat <- scoreFACT_Taxane(exampleDat, updateItems = TRUE, keepNvalid = TRUE)
 #' names(scoredDat)
 #' ## Descriptives of scored scales
-#' summary(scoredDat[, c('PWB', 'SWB', 'EWB', 'FWB', 'FACTG',
-#'                       'TaxS', 'FACT_Taxane_TOTAL', 'FACT_Taxane_TOI')])
+#' summary(scoredDat[, c("PWB", "SWB", "EWB", "FWB", "FACTG",
+#'                       "TaxS", "FACT_Taxane_TOTAL", "FACT_Taxane_TOI")])
 #' }
 scoreFACT_Taxane <- function(df, id = NULL, AConly = FALSE, updateItems = FALSE,
                          keepNvalid = FALSE) {
@@ -79,11 +79,11 @@ scoreFACT_Taxane <- function(df, id = NULL, AConly = FALSE, updateItems = FALSE,
     scoreFACT_any(
       df = df,
       id = id,
-      namesAC = c("Ntx1", "Ntx2", "Ntx3", "Ntx4", "Ntx5", "HI12", 
-                  "Ntx6", "Ntx7", "Ntx8", "Ntx9", "An6", "Tax1", "Tax2", "Tax3", 
+      namesAC = c("Ntx1", "Ntx2", "Ntx3", "Ntx4", "Ntx5", "HI12",
+                  "Ntx6", "Ntx7", "Ntx8", "Ntx9", "An6", "Tax1", "Tax2", "Tax3",
                   "Tax4", "Tax5"),
-      namesRev = c("Ntx1", "Ntx2", "Ntx3", "Ntx4", "Ntx5", "HI12", 
-                   "Ntx6", "Ntx7", "Ntx8", "Ntx9", "An6", "Tax1", "Tax2", "Tax3", 
+      namesRev = c("Ntx1", "Ntx2", "Ntx3", "Ntx4", "Ntx5", "HI12",
+                   "Ntx6", "Ntx7", "Ntx8", "Ntx9", "An6", "Tax1", "Tax2", "Tax3",
                    "Tax4", "Tax5"),
       nameSub = "TaxS",
       nameTot = "FACT_Taxane",

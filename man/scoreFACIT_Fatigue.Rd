@@ -33,7 +33,7 @@ or, equivalently, set it to \code{FALSE}.}
 A data frame containing the following scale score is returned:
 
 \itemize{
-\item \strong{FACIT-Fatigue} - FACIT Fatigue
+\item \strong{FACIT_Fatigue} - FACIT Fatigue
 }
 
 If a variable was given to the \code{id} argument, then that variable will
@@ -97,7 +97,7 @@ names(mergeDat)
 scoredDat <- scoreFACIT_Fatigue(exampleDat, updateItems = TRUE, keepNvalid = TRUE)
 names(scoredDat)
 ## Descriptives of scored scales
-summary(scoredDat['FACIT-Fatigue'])
+summary(scoredDat['FACIT_Fatigue'])
 }
 \references{
 FACIT-Fatigue Scoring Guidelines, available at

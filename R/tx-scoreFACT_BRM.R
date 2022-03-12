@@ -126,7 +126,7 @@ scoreFACT_BRM <- function(df, updateItems = FALSE, keepNvalid = FALSE) {
     AC_names <- c(AC_names1, AC_names2)
     revNames <- toupper(c("BMT6", "HI12", "BRM1", "BRM2", "BRM3", "BRM10",
         "HI8", "HI9", "BRM7", "BRM8", "BRM9"))
-    AC_items <- dfGup[, AC_names]
+    AC_items <- df[, AC_names]
     if (any(!(as.matrix(AC_items) %in% c(0:4, 8, 9, NA)))) {
         stop("At least 1 response is out of range (i.e., not 0-4, 8, 9, or NA)")
     }

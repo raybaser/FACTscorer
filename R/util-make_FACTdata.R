@@ -30,7 +30,10 @@
 #'   of respondents.
 #' @param pmiss2 The proportion of items with missing answers in the second half
 #'   of respondents.
-#'
+#' @param misscode The value used for missing answers. Default is `NA`.
+#'   \code{FACTscorer} functions consider values of `NA`, `8`, and `9` to be
+#'   missing answers, so these are the only 3 values for this argument useful
+#'   for testing \code{FACTscorer} functions.
 #' @return
 #' A data frame with \code{N} fake respondents (8 by default).  The first half
 #' of respondents will have missing values (coded as \code{9}) for roughly 10\%
@@ -72,7 +75,7 @@ make_FACTdata <- function(namesAC = NULL, N = 8, AConly = FALSE,
   miss50 <- t(replicate(N*0.5, sample(c(0, 9), prob = c(1 - pmiss2, pmiss2),
                                       size = length(itemNames), replace = TRUE)))
   missMtx <- rbind(miss10, miss50)
-  ## Using NA (instead of 9) as the code for missing responses
+  ## Using NA (instead of 9) as the default code for missing responses
   exampleDat[missMtx == 9] <- misscode
   exampleDat <- as.data.frame(cbind(ID = paste0('ID', 1:N),
                                     as.data.frame(exampleDat)))

@@ -125,7 +125,7 @@ scoreFACT_Bplus4 <- function(df, updateItems = FALSE, keepNvalid = FALSE) {
     AC_names <- unique(c(AC_names1, AC_names2))
     revNames <- unique(c("B1", "B2", "B3", "B5", "B6", "B7", "B8", "B3",
         "B10", "B11", "B12", "B13"))
-    AC_items <- dfGup[, AC_names]
+    AC_items <- df[, AC_names]
     if (any(!(as.matrix(AC_items) %in% c(0:4, 8, 9, NA)))) {
         stop("At least 1 response is out of range (i.e., not 0-4, 8, 9, or NA)")
     }

@@ -1,7 +1,7 @@
 Package: FACTscorer
 Title: Scores the FACT and FACIT Family of Patient-Reported Outcome
     Measures
-Version: 0.1.0.9000
+Version: 0.2.0
 Authors@R: c(
     person("Ray", "Baser", email="ray.stats@gmail.com", role=c("aut", "cre")),
     person("Ayelet", "Greenberg", email="greenberg613@gmail.com", role="ctb"))

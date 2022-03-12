@@ -33,7 +33,7 @@ or, equivalently, set it to \code{FALSE}.}
 A data frame containing the following scale score is returned:
 
 \itemize{
-\item \strong{FACIT_BP} - FACIT Bone Pain
+\item \strong{FACT_BP} - FACT Bone Pain
 }
 
 If a variable was given to the \code{id} argument, then that variable will
@@ -42,11 +42,12 @@ variables will be returned if \code{updateItems = TRUE} or \code{keepNvalid
 = TRUE}.
 }
 \description{
-Scores the Functional Assessment of Cancer Therapy- Bone Pain (FACT-BP) from item responses.
+Scores the Functional Assessment of Cancer Therapy - Bone Pain (FACT-BP)
+from item responses.
 }
 \details{
-Given a data frame that includes all of the FACIT-BP  items as
-variables, appropriately named, this function generates the FACIT-BP
+Given a data frame that includes all of the FACT-BP  items as
+variables, appropriately named, this function generates the FACT-BP
 scale score.  It is crucial that the item variables in the supplied data
 frame are named according to FACT conventions.  For example, the first item
 should be named GP1, the second GP2, and so on.  Please refer to the
@@ -82,10 +83,10 @@ exampleDat <- make_FACTdata(namesAC = itemNames, AConly = TRUE)
 ## NOW scoring the items in exampleDat
 
 ## Returns data frame with ONLY scale score
-(scoredDat <- scoreFACIT_BP(exampleDat))
+(scoredDat <- scoreFACT_BP(exampleDat))
 
 ## Using the id argument (makes merging with original data more fool-proof):
-(scoredDat <- scoreFACIT_BP(exampleDat, id = "ID"))
+(scoredDat <- scoreFACT_BP(exampleDat, id = "ID"))
 
 ## Merge back with original data, exampleDat:
 mergeDat <- merge(exampleDat, scoredDat, by = "ID")
@@ -93,13 +94,13 @@ names(mergeDat)
 
 ## Returns scale score, plus recoded items (updateItems = TRUE)
 ## Also illustrates effect of setting keepNvalid = TRUE.
-scoredDat <- scoreFACIT_BP(exampleDat, updateItems = TRUE, keepNvalid = TRUE)
+scoredDat <- scoreFACT_BP(exampleDat, updateItems = TRUE, keepNvalid = TRUE)
 names(scoredDat)
 ## Descriptives of scored scales
-summary(scoredDat['FACIT_BP'])
+summary(scoredDat['FACT_BP'])
 }
 \references{
-FACIT-BP Scoring Guidelines, available at
+FACT-BP Scoring Guidelines, available at
 \url{http://www.facit.org}
 }
 \seealso{
@@ -108,6 +109,6 @@ For additional details on the function arguments, see
 examples are omitted below.  However, this function is very similar to the
 \code{\link{scoreFACTG7}} function.  See the documentation for
 \code{\link{scoreFACTG7}} for examples.  Alternatively, examples for
-\code{scoreFACIT_BP} can be accessed by running
-\code{example(scoreFACIT_BP)}.
+\code{scoreFACT_BP} can be accessed by running
+\code{example(scoreFACT_BP)}.
 }

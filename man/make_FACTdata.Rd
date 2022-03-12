@@ -28,6 +28,11 @@ of respondents.}
 
 \item{pmiss2}{The proportion of items with missing answers in the second half
 of respondents.}
+
+\item{misscode}{The value used for missing answers. Default is \code{NA}.
+\code{FACTscorer} functions consider values of \code{NA}, \code{8}, and \code{9} to be
+missing answers, so these are the only 3 values for this argument useful
+for testing \code{FACTscorer} functions.}
 }
 \value{
 A data frame with \code{N} fake respondents (8 by default).  The first half
